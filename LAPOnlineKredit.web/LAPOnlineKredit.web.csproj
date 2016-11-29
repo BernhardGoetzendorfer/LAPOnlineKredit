@@ -121,9 +121,26 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KonsumKreditController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ArbeitgeberModel.cs" />
+    <Compile Include="Models\BeschaeftigungsArtModel.cs" />
+    <Compile Include="Models\BildungsModel.cs" />
+    <Compile Include="Models\BrancheModel.cs" />
+    <Compile Include="Models\FamilienStandModel.cs" />
+    <Compile Include="Models\FinanzielleSituationModel.cs" />
+    <Compile Include="Models\IdentifikationsModel.cs" />
+    <Compile Include="Models\KontaktDatenModel.cs" />
+    <Compile Include="Models\KontoInformationenModel.cs" />
+    <Compile Include="Models\KreditRahmenModel.cs" />
+    <Compile Include="Models\NachschlageFeldModel.cs" />
+    <Compile Include="Models\PersönlicheDatenModel.cs" />
+    <Compile Include="Models\StaatsbuergerschaftsModel.cs" />
+    <Compile Include="Models\TitelModel.cs" />
+    <Compile Include="Models\WohnartModel.cs" />
+    <Compile Include="Models\ZusammenfassungModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -186,11 +203,17 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\icons\general\" />
     <Folder Include="Content\img\icons\social\" />
-    <Folder Include="Models\" />
+    <Folder Include="Views\KonsumKredit\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LAPOnlineKredit.logic\LAPOnlineKredit.logic.csproj">
+      <Project>{ed2c73f0-b2e9-47f2-b375-60eb2aea8bf0}</Project>
+      <Name>LAPOnlineKredit.logic</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

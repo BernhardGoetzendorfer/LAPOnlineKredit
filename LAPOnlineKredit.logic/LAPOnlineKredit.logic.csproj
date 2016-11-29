@@ -72,6 +72,7 @@
     <Compile Include="Identifikationsart.cs">
       <DependentUpon>OnlineKreditModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="KonsumKreditVerwaltung.cs" />
     <Compile Include="Kontakt.cs">
       <DependentUpon>OnlineKreditModel.tt</DependentUpon>
     </Compile>
