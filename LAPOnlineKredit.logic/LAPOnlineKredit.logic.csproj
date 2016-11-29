@@ -30,8 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,7 +48,101 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abschluss.cs">
+      <DependentUpon>OnlineKreditModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Arbeitgeber.cs">
+      <DependentUpon>OnlineKreditModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BeschaeftigungsArt.cs">
+      <DependentUpon>OnlineKreditModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Branche.cs">
+      <DependentUpon>OnlineKreditModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Einstellungen.cs">
+      <DependentUpon>OnlineKreditModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Familienstand.cs">
+      <DependentUpon>OnlineKreditModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FinanzielleSituation.cs">
+      <DependentUpon>OnlineKreditModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Identifikationsart.cs">
+      <DependentUpon>OnlineKreditModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Kontakt.cs">
+      <DependentUpon>OnlineKreditModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Konto.cs">
+      <DependentUpon>OnlineKreditModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Kredit.cs">
+      <DependentUpon>OnlineKreditModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Kunde.cs">
+      <DependentUpon>OnlineKreditModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Land.cs">
+      <DependentUpon>OnlineKreditModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs">
+      <DependentUpon>OnlineKreditModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OnlineKreditModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OnlineKreditModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OnlineKreditModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OnlineKreditModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OnlineKreditModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OnlineKreditModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Ort.cs">
+      <DependentUpon>OnlineKreditModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Titel.cs">
+      <DependentUpon>OnlineKreditModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Wohnart.cs">
+      <DependentUpon>OnlineKreditModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="OnlineKreditModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OnlineKreditModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="OnlineKreditModel.edmx.diagram">
+      <DependentUpon>OnlineKreditModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="OnlineKreditModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OnlineKreditModel.edmx</DependentUpon>
+      <LastGenOutput>OnlineKreditModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="OnlineKreditModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OnlineKreditModel.edmx</DependentUpon>
+      <LastGenOutput>OnlineKreditModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
