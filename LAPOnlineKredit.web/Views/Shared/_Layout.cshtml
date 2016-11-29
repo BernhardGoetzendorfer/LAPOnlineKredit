@@ -1,17 +1,180 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
+    <title>Deutsche Bank AG</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Meine ASP.NET-Anwendung</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>   
-    @RenderBody()
+    <meta name="author" content="Bernahrd Götzendorfer">
+    <meta name="description" content="bernhardgoetzendorfer95@gmail.com">
 
-    @Scripts.Render("~/bundles/jquery")
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="~/Content/css/ion.rangeSlider.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/css/ion.rangeSlider.skinHTML5.css" rel="stylesheet" type="text/css" media="all" />
+
+    <script src="~/Content/scripts/jquery-1.11.0.min.js"></script>
+    <script src="~/Content/scripts/bootstrap.min.js"></script>
+    <script src="~/Content/scripts/ion.rangeSlider.min.js"></script>
+
+    <!-- Icons -->
+    <link href="~/Content/img/general/stylesheets/general_foundicons.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="~/Content/img/social/stylesheets/social_foundicons.css" media="screen" rel="stylesheet" type="text/css" />
+
+
+
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+
+    <link href="~/Content/css/custom.css" rel="stylesheet" type="text/css" />
+
+
+
+</head>
+<body id="pageBody">
+
+    <div id="decorative2">
+        <div class="container">
+
+            <div class="divPanel topArea notop nobottom">
+                <div class="row-fluid">
+                    <div class="span12">
+
+                        <div id="divLogo" class="pull-left">
+                            <a href="index.html" id="divSiteTitle">Deutsche Bank ag</a><br />
+                            <a href="index.html" id="divTagLine">Ihr Partner bei Bankangelegenheiten</a>
+                        </div>
+
+                        <div id="divMenuRight" class="pull-right">
+                            <div class="navbar">
+                                <button type="button" class="btn btn-navbar-highlight btn-large btn-primary" data-toggle="collapse" data-target=".nav-collapse">
+                                    NAVIGATIO<span class="icon-chevron-down icon-white"></span>
+                                </button>
+                                <div class="nav-collapse collapse">
+                                    <ul class="nav nav-pills ddmenu">
+                                        <li class="dropdown"><a href="index.html">Welcome</a></li>
+                                        <li class="dropdown"><a href="">Online Kredite</a></li>
+                                        <li class="dropdown"><a href="">Kunden</a></li>
+                                        <li class="dropdown"><a href="">Kontakt</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="content" style="text-align: center">
+        @RenderBody()
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    </div>
+
+    <div id="footerOuterSeparator"></div>
+
+    <div id="divFooter" class="footerArea">
+
+        <div class="container">
+
+            <div class="divPanel">
+
+                <div class="row-fluid">
+                    <div class="span3" id="footerArea1">
+
+                        <h3>About Company</h3>
+
+                        <p>Dieser Internetauftritt ist ein gemeinsames Angebot der Deutsche Bank AG und der Deutsche Bank Privat- und Geschäftskunden AG.
+                        <p>
+                            <a href="#" title="Terms of Use">Terms of Use</a><br />
+                            <a href="#" title="Privacy Policy">Privacy Policy</a><br />
+                            <a href="#" title="FAQ">FAQ</a><br />
+                            <a href="#" title="Sitemap">Sitemap</a>
+                        </p>
+
+                    </div>
+
+                    <div class="span3" id="footerArea3">
+
+                        <h3>Über uns</h3>
+                        <p>Wir sind ganz okay.</p>
+
+                    </div>
+
+                    <div class="span3" id="footerArea2">
+
+                        <h3>Recent Blog Posts</h3>
+                        <p>
+                            <a href="#" title="">Lorem Ipsum is simply dummy text</a><br />
+                            <span style="text-transform:none;">2 hours ago</span>
+                        </p>
+                        <p>
+                            <a href="#" title="">Duis mollis, est non commodo luctus</a><br />
+                            <span style="text-transform:none;">5 hours ago</span>
+                        </p>
+                        <p>
+                            <a href="#" title="">Maecenas sed diam eget risus varius</a><br />
+                            <span style="text-transform:none;">19 hours ago</span>
+                        </p>
+                        <p>
+                            <a href="#" title="">VIEW ALL POSTS</a>
+                        </p>
+
+                    </div>
+
+                    <div class="span3" id="footerArea4">
+
+                        <h3>Kontakt</h3>
+
+                        <ul id="contact-info">
+                            <li>
+                                <i class="general foundicon-phone icon"></i>
+                                <span class="field">Telefon:</span>
+                                <br />
+                                (+49) 0660 726 26 39
+                            </li>
+                            <li>
+                                <i class="general foundicon-mail icon"></i>
+                                <span class="field">Email:</span>
+                                <br />
+                                <a href="mailto:bernhardgoetzendorfer95@gmail.com" title="Email">office@DB.de</a>
+                            </li>
+                            <li>
+                                <i class="general foundicon-home icon" style="margin-bottom:50px"></i>
+                                <span class="field">Addresse:</span>
+                                <br />
+                                Rinnböckstraße 172<br />
+                                1110 Wien<br />
+                                Österreich
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                <br /><br />
+                <div class="row-fluid">
+                    <div class="span12">
+                        <p class="copyright">
+                            Copyright © 2016 Deutsche Bank AG. All Rights Reserved.
+                        </p>
+                    </div>
+                </div>
+                <br />
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="~/Content/scripts/bootstrap.min.js" type="text/javascript"></script>
+
     @RenderSection("scripts", required: false)
+
 </body>
 </html>

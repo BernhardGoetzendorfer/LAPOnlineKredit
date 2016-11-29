@@ -184,7 +184,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\img\icons\" />
+    <Folder Include="Content\img\icons\general\" />
+    <Folder Include="Content\img\icons\social\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
