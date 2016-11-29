@@ -127,8 +127,38 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\bootstrap-responsive.css" />
+    <Content Include="Content\css\bootstrap-responsive.min.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\chocolat.css" />
+    <Content Include="Content\css\custom.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\ion.rangeSlider.css" />
+    <Content Include="Content\css\ion.rangeSlider.skinFlat.css" />
+    <Content Include="Content\css\ion.rangeSlider.skinHTML5.css" />
+    <Content Include="Content\css\ion.rangeSlider.skinModern.css" />
+    <Content Include="Content\css\ion.rangeSlider.skinNice.css" />
+    <Content Include="Content\css\ion.rangeSlider.skinSimple.css" />
+    <Content Include="Content\css\normalize.css" />
+    <Content Include="Content\css\slideControl.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\img\bright-lights-big-city.jpg" />
+    <Content Include="Content\img\glyphicons-halflings-white.png" />
+    <Content Include="Content\img\glyphicons-halflings.png" />
+    <Content Include="Content\script\bootstrap.js" />
+    <Content Include="Content\script\bootstrap.min.js" />
+    <Content Include="Content\script\easing.js" />
+    <Content Include="Content\script\ion.rangeSlider.js" />
+    <Content Include="Content\script\ion.rangeSlider.min.js" />
+    <Content Include="Content\script\jquery-1.11.0.min.js" />
+    <Content Include="Content\script\jquery.chocolat.js" />
+    <Content Include="Content\script\jquery.hoverdir.js" />
+    <Content Include="Content\script\jquery.slideControl.js" />
+    <Content Include="Content\script\modernizr.custom.97074.js" />
+    <Content Include="Content\script\move-top.js" />
+    <Content Include="Content\script\npm.js" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -154,6 +184,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\img\icons\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
