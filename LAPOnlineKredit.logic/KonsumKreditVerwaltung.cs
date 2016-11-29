@@ -24,7 +24,7 @@ namespace LAPOnlineKredit.logic
 
             try
             {
-                using (var context = new LAPOnlineKredit())
+                using (var context = new OnlineKreditEntities())
                 {
                     neuerKunde = new logic.Kunde()
                     {
@@ -32,7 +32,7 @@ namespace LAPOnlineKredit.logic
                         Nachname = "anonym",
                         Geschlecht = "m"
                     };
-                    context.AlleKunden.Add(neuerKunde);
+                    context.alleKunden.Add(neuerKunde);
 
                     int anzahlZeilenBetroffen = context.SaveChanges();
                     Debug.WriteLine($"{anzahlZeilenBetroffen} Kunden angelegt!");
@@ -67,11 +67,11 @@ namespace LAPOnlineKredit.logic
 
             try
             {
-                using (var context = new LAPOnlineKredit())
+                using (var context = new OnlineKreditEntities())
                 {
 
                     /// speichere zum Kunden die Angaben
-                    Kunde aktKunde = context.AlleKunden.Where(x => x.ID == idKunde).FirstOrDefault();
+                    Kunde aktKunde = context.alleKunden.Where(x => x.ID == idKunde).FirstOrDefault();
 
                     if (aktKunde != null)
                     {
@@ -82,7 +82,7 @@ namespace LAPOnlineKredit.logic
                             ID = idKunde
                         };
 
-                        context.AlleKredite.Add(neuerKreditWunsch);
+                        context.alleKredite.Add(neuerKreditWunsch);
                     }
 
                     int anzahlZeilenBetroffen = context.SaveChanges();
@@ -122,11 +122,11 @@ namespace LAPOnlineKredit.logic
 
             try
             {
-                using (var context = new LAPOnlineKredit())
+                using (var context = new OnlineKreditEntities())
                 {
 
                     /// speichere zum Kunden die Angaben
-                    Kunde aktKunde = context.AlleKunden.Where(x => x.ID == idKunde).FirstOrDefault();
+                    Kunde aktKunde = context.alleKunden.Where(x => x.ID == idKunde).FirstOrDefault();
 
                     if (aktKunde != null)
                     {
@@ -174,7 +174,7 @@ namespace LAPOnlineKredit.logic
 
             try
             {
-                using (var context = new LAPOnlineKredit())
+                using (var context = new OnlineKreditEntities())
                 {
                     alleBranchen = context.alleBranchen.ToList();
                 }
@@ -205,9 +205,9 @@ namespace LAPOnlineKredit.logic
 
             try
             {
-                using (var context = new LAPOnlineKredit())
+                using (var context = new OnlineKreditEntities())
                 {
-                    alleBeschaeftigungsArten = context.AlleBeschaeftigungsArten.ToList();
+                    alleBeschaeftigungsArten = context.alleBeschaeftigungsArten.ToList();
                 }
             }
             catch (Exception ex)
@@ -236,9 +236,9 @@ namespace LAPOnlineKredit.logic
 
             try
             {
-                using (var context = new LAPOnlineKredit())
+                using (var context = new OnlineKreditEntities())
                 {
-                    alleAbschlüsse = context.AlleAbschlüsse.ToList();
+                    alleAbschlüsse = context.alleAbschluesse.ToList();
                 }
             }
             catch (Exception ex)
@@ -267,9 +267,9 @@ namespace LAPOnlineKredit.logic
 
             try
             {
-                using (var context = new LAPOnlineKredit())
+                using (var context = new OnlineKreditEntities())
                 {
-                    alleFamilienStandsAngaben = context.AlleFamilienstandAngaben.ToList();
+                    alleFamilienStandsAngaben = context.alleFamilienstandAngaben.ToList();
                 }
             }
             catch (Exception ex)
@@ -298,7 +298,7 @@ namespace LAPOnlineKredit.logic
 
             try
             {
-                using (var context = new LAPOnlineKredit())
+                using (var context = new OnlineKreditEntities())
                 {
                     alleLänder = context.alleLänder.ToList();
                 }
@@ -329,7 +329,7 @@ namespace LAPOnlineKredit.logic
 
             try
             {
-                using (var context = new LAPOnlineKredit())
+                using (var context = new OnlineKreditEntities())
                 {
                     alleWohnarten = context.alleWohnarten.ToList();
                 }
@@ -360,7 +360,7 @@ namespace LAPOnlineKredit.logic
 
             try
             {
-                using (var context = new LAPOnlineKredit())
+                using (var context = new OnlineKreditEntities())
                 {
                     alleIdentifikationsArten = context.alleIdentifikationsarten.ToList();
                 }
@@ -391,9 +391,9 @@ namespace LAPOnlineKredit.logic
 
             try
             {
-                using (var context = new LAPOnlineKredit())
+                using (var context = new OnlineKreditEntities())
                 {
-                    alleTitel = context.AlleTitel.ToList();
+                    alleTitel = context.alleTitel.ToList();
                 }
             }
             catch (Exception ex)
@@ -418,11 +418,11 @@ namespace LAPOnlineKredit.logic
 
             try
             {
-                using (var context = new LAPOnlineKredit())
+                using (var context = new OnlineKreditEntities())
                 {
 
                     /// speichere zum Kunden die Angaben
-                    Kunde aktKunde = context.AlleKunden.Where(x => x.ID == idKunde).FirstOrDefault();
+                    Kunde aktKunde = context.alleKunden.Where(x => x.ID == idKunde).FirstOrDefault();
 
                     if (aktKunde != null)
                     {
@@ -475,11 +475,11 @@ namespace LAPOnlineKredit.logic
 
             try
             {
-                using (var context = new LAPOnlineKredit())
+                using (var context = new OnlineKreditEntities())
                 {
 
                     /// speichere zum Kunden die Angaben
-                    Kunde aktKunde = context.AlleKunden.Where(x => x.ID == idKunde).FirstOrDefault();
+                    Kunde aktKunde = context.alleKunden.Where(x => x.ID == idKunde).FirstOrDefault();
 
                     if (aktKunde != null)
                     {
@@ -488,7 +488,7 @@ namespace LAPOnlineKredit.logic
                             BeschaeftigtSeit = DateTime.Parse(beschäftigtSeit),
                             FKBranche = idBranche,
                             FKBeschaeftigungsArt = idBeschäftigungsArt,
-                            Firma = firmenName
+                            Firmenname = firmenName
                         };
                         aktKunde.Arbeitgeber = neuerArbeitgeber;
                     }
@@ -511,7 +511,7 @@ namespace LAPOnlineKredit.logic
             return erfolgreich;
         }
 
-        public static bool KontoInformationenSpeichern(string bankName, string iban, string bic, bool neuesKonto, int idKunde)
+        public static bool KontoInformationenSpeichern(string bankName, string iban, string bic, bool neuesKonto, int idKunde, string kreditArt)
         {
             Debug.WriteLine("KonsumKreditVerwaltung - KontoInformationenSpeichern");
             Debug.Indent();
@@ -520,24 +520,26 @@ namespace LAPOnlineKredit.logic
 
             try
             {
-                using (var context = new LAPOnlineKredit())
+                using (var context = new OnlineKreditEntities())
                 {
 
                     /// speichere zum Kunden die Angaben
-                    Kunde aktKunde = context.AlleKunden.Where(x => x.ID == idKunde).FirstOrDefault();
+                    Kunde aktKunde = context.alleKunden.Where(x => x.ID == idKunde).FirstOrDefault();
 
                     if (aktKunde != null)
                     {
-                        KontoDaten neueKontoDaten = new KontoDaten()
+                        Konto neueKontoDaten = new Konto()
                         {
                             Bankname = bankName,
                             IBAN = iban,
                             BIC = bic,
                             IstKunde = !neuesKonto,
-                            ID = idKunde
+                            ID = idKunde,
+                            KreditArt = kreditArt
+                            
                         };
 
-                        context.AlleKontoDaten.Add(neueKontoDaten);
+                        context.alleKontaktDaten.Add(neueKontoDaten);
                     }
 
                     int anzahlZeilenBetroffen = context.SaveChanges();

@@ -206,7 +206,7 @@ namespace LAPOnlineKredit.Web.Controllers
             {
                 alleBranchen.Add(new BrancheModel()
                 {
-                    ID = branche.Id.ToString(),
+                    ID = branche.ID.ToString(),
                     Bezeichnung = branche.Bezeichnung
                 });
             }

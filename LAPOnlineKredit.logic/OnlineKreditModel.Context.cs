@@ -37,7 +37,7 @@ namespace LAPOnlineKredit.logic
         public DbSet<Konto> alleKonten { get; set; }
         public DbSet<Kredit> alleKredite { get; set; }
         public DbSet<Kunde> alleKunden { get; set; }
-        public DbSet<Land> alleLand { get; set; }
+        public DbSet<Land> alleLänder { get; set; }
         public DbSet<Login> alleLoginDaten { get; set; }
         public DbSet<Ort> alleOrte { get; set; }
         public DbSet<Titel> alleTitel { get; set; }

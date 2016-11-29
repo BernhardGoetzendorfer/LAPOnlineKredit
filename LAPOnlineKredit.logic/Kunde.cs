@@ -16,7 +16,7 @@ namespace LAPOnlineKredit.logic
     {
         public Kunde()
         {
-            this.tblKredit = new HashSet<Kredit>();
+            this.Kredit = new HashSet<Kredit>();
         }
     
         public int ID { get; set; }
@@ -33,17 +33,17 @@ namespace LAPOnlineKredit.logic
         public Nullable<int> UnterhaltpflichtigeKinder { get; set; }
         public string Identifikationsnummer { get; set; }
     
-        public virtual Abschluss tblAbschluss { get; set; }
-        public virtual Arbeitgeber tblArbeitgeber { get; set; }
-        public virtual Familienstand tblFamilienstand { get; set; }
-        public virtual FinanzielleSituation tblFinanzielleSituation { get; set; }
-        public virtual Identifikationsart tblIdentifikationsart { get; set; }
-        public virtual Kontakt tblKontakt { get; set; }
-        public virtual Konto tblKonto { get; set; }
-        public virtual ICollection<Kredit> tblKredit { get; set; }
-        public virtual Titel tblTitel { get; set; }
-        public virtual Wohnart tblWohnart { get; set; }
-        public virtual Land tblLand { get; set; }
-        public virtual Login tblLogin { get; set; }
+        public virtual Abschluss Abschluss { get; set; }
+        public virtual Arbeitgeber Arbeitgeber { get; set; }
+        public virtual Familienstand Familienstand { get; set; }
+        public virtual FinanzielleSituation FinanzielleSituation { get; set; }
+        public virtual Identifikationsart Identifikationsart { get; set; }
+        public virtual Kontakt Kontakt { get; set; }
+        public virtual Konto Konto { get; set; }
+        public virtual ICollection<Kredit> Kredit { get; set; }
+        public virtual Titel Titel { get; set; }
+        public virtual Wohnart Wohnart { get; set; }
+        public virtual Land Land { get; set; }
+        public virtual Login Login { get; set; }
     }
 }
