@@ -127,6 +127,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\css\bootstrap-responsive.css" />
     <Content Include="Content\css\bootstrap-responsive.min.css" />
     <Content Include="Content\css\bootstrap.css" />
@@ -143,22 +144,37 @@
     <Content Include="Content\css\normalize.css" />
     <Content Include="Content\css\slideControl.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\img\bright-lights-big-city.jpg" />
     <Content Include="Content\img\glyphicons-halflings-white.png" />
     <Content Include="Content\img\glyphicons-halflings.png" />
+    <Content Include="Content\script\bootstrap-datetimepicker.min.js" />
+    <Content Include="Content\script\bootstrap-select.js" />
     <Content Include="Content\script\bootstrap.js" />
     <Content Include="Content\script\bootstrap.min.js" />
     <Content Include="Content\script\easing.js" />
     <Content Include="Content\script\ion.rangeSlider.js" />
     <Content Include="Content\script\ion.rangeSlider.min.js" />
     <Content Include="Content\script\jquery-1.11.0.min.js" />
+    <Content Include="Content\script\jquery-3.1.1.min.js" />
     <Content Include="Content\script\jquery.chocolat.js" />
     <Content Include="Content\script\jquery.hoverdir.js" />
     <Content Include="Content\script\jquery.slideControl.js" />
     <Content Include="Content\script\modernizr.custom.97074.js" />
+    <Content Include="Content\script\moment-with-locales.min.js" />
     <Content Include="Content\script\move-top.js" />
     <Content Include="Content\script\npm.js" />
     <Content Include="Global.asax" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

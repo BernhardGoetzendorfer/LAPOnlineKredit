@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dbOnlineKreditModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="dbOnlineKreditModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblAbschluss">
           <Key>
             <PropertyRef Name="IDAbschluss" />
@@ -95,10 +95,10 @@
           <Key>
             <PropertyRef Name="IDKredit" />
           </Key>
-          <Property Name="IDKredit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDKredit" Type="int" Nullable="false" />
           <Property Name="FKKunde" Type="int" />
-          <Property Name="Betrag" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="Laufzeit" Type="smallint" Nullable="false" />
+          <Property Name="Betrag" Type="int" Nullable="false" />
+          <Property Name="Laufzeit" Type="int" Nullable="false" />
           <Property Name="KreditBewilligt" Type="bit" />
         </EntityType>
         <EntityType Name="tblKunde">
@@ -157,7 +157,7 @@
           <Property Name="IDWohnart" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Wohnart" Type="varchar" MaxLength="40" Nullable="false" />
         </EntityType>
-        <Association Name="FK__tblArbeit__FKBes__403A8C7D">
+        <Association Name="FK__tblArbeit__FKBes__412EB0B6">
           <End Role="tblBeschaeftigungsArt" Type="Self.tblBeschaeftigungsArt" Multiplicity="0..1" />
           <End Role="tblArbeitgeber" Type="Self.tblArbeitgeber" Multiplicity="*" />
           <ReferentialConstraint>
@@ -169,7 +169,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblArbeit__FKBra__412EB0B6">
+        <Association Name="FK__tblArbeit__FKBra__4222D4EF">
           <End Role="tblBranche" Type="Self.tblBranche" Multiplicity="0..1" />
           <End Role="tblArbeitgeber" Type="Self.tblArbeitgeber" Multiplicity="*" />
           <ReferentialConstraint>
@@ -181,7 +181,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblArbeit__IDArb__3F466844">
+        <Association Name="FK__tblArbeit__IDArb__403A8C7D">
           <End Role="tblKunde" Type="Self.tblKunde" Multiplicity="1" />
           <End Role="tblArbeitgeber" Type="Self.tblArbeitgeber" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -193,7 +193,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblFinanz__IDFin__36B12243">
+        <Association Name="FK__tblFinanz__IDFin__37A5467C">
           <End Role="tblKunde" Type="Self.tblKunde" Multiplicity="1" />
           <End Role="tblFinanzielleSituation" Type="Self.tblFinanzielleSituation" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -205,7 +205,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblKontak__FKOrt__47DBAE45">
+        <Association Name="FK__tblKontak__FKOrt__48CFD27E">
           <End Role="tblOrt" Type="Self.tblOrt" Multiplicity="0..1" />
           <End Role="tblKontakt" Type="Self.tblKontakt" Multiplicity="*" />
           <ReferentialConstraint>
@@ -217,7 +217,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblKontak__IDKon__46E78A0C">
+        <Association Name="FK__tblKontak__IDKon__47DBAE45">
           <End Role="tblKunde" Type="Self.tblKunde" Multiplicity="1" />
           <End Role="tblKontakt" Type="Self.tblKontakt" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -229,7 +229,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblKonto__IDKont__4AB81AF0">
+        <Association Name="FK__tblKonto__IDKont__4BAC3F29">
           <End Role="tblKunde" Type="Self.tblKunde" Multiplicity="1" />
           <End Role="tblKonto" Type="Self.tblKonto" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -241,7 +241,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblKredit__FKKun__31EC6D26">
+        <Association Name="FK__tblKredit__FKKun__32E0915F">
           <End Role="tblKunde" Type="Self.tblKunde" Multiplicity="0..1" />
           <End Role="tblKredit" Type="Self.tblKredit" Multiplicity="*" />
           <ReferentialConstraint>
@@ -250,6 +250,18 @@
             </Principal>
             <Dependent Role="tblKredit">
               <PropertyRef Name="FKKunde" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblKredit__IDKre__31EC6D26">
+          <End Role="tblKunde" Type="Self.tblKunde" Multiplicity="1" />
+          <End Role="tblKredit" Type="Self.tblKredit" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblKunde">
+              <PropertyRef Name="IDKunde" />
+            </Principal>
+            <Dependent Role="tblKredit">
+              <PropertyRef Name="IDKredit" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -337,7 +349,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblOrt__FKLand__440B1D61">
+        <Association Name="FK__tblOrt__FKLand__44FF419A">
           <End Role="tblLand" Type="Self.tblLand" Multiplicity="0..1" />
           <End Role="tblOrt" Type="Self.tblOrt" Multiplicity="*" />
           <ReferentialConstraint>
@@ -367,35 +379,39 @@
           <EntitySet Name="tblOrt" EntityType="Self.tblOrt" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblTitel" EntityType="Self.tblTitel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblWohnart" EntityType="Self.tblWohnart" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__tblArbeit__FKBes__403A8C7D" Association="Self.FK__tblArbeit__FKBes__403A8C7D">
+          <AssociationSet Name="FK__tblArbeit__FKBes__412EB0B6" Association="Self.FK__tblArbeit__FKBes__412EB0B6">
             <End Role="tblBeschaeftigungsArt" EntitySet="tblBeschaeftigungsArt" />
             <End Role="tblArbeitgeber" EntitySet="tblArbeitgeber" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblArbeit__FKBra__412EB0B6" Association="Self.FK__tblArbeit__FKBra__412EB0B6">
+          <AssociationSet Name="FK__tblArbeit__FKBra__4222D4EF" Association="Self.FK__tblArbeit__FKBra__4222D4EF">
             <End Role="tblBranche" EntitySet="tblBranche" />
             <End Role="tblArbeitgeber" EntitySet="tblArbeitgeber" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblArbeit__IDArb__3F466844" Association="Self.FK__tblArbeit__IDArb__3F466844">
+          <AssociationSet Name="FK__tblArbeit__IDArb__403A8C7D" Association="Self.FK__tblArbeit__IDArb__403A8C7D">
             <End Role="tblKunde" EntitySet="tblKunde" />
             <End Role="tblArbeitgeber" EntitySet="tblArbeitgeber" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblFinanz__IDFin__36B12243" Association="Self.FK__tblFinanz__IDFin__36B12243">
+          <AssociationSet Name="FK__tblFinanz__IDFin__37A5467C" Association="Self.FK__tblFinanz__IDFin__37A5467C">
             <End Role="tblKunde" EntitySet="tblKunde" />
             <End Role="tblFinanzielleSituation" EntitySet="tblFinanzielleSituation" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblKontak__FKOrt__47DBAE45" Association="Self.FK__tblKontak__FKOrt__47DBAE45">
+          <AssociationSet Name="FK__tblKontak__FKOrt__48CFD27E" Association="Self.FK__tblKontak__FKOrt__48CFD27E">
             <End Role="tblOrt" EntitySet="tblOrt" />
             <End Role="tblKontakt" EntitySet="tblKontakt" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblKontak__IDKon__46E78A0C" Association="Self.FK__tblKontak__IDKon__46E78A0C">
+          <AssociationSet Name="FK__tblKontak__IDKon__47DBAE45" Association="Self.FK__tblKontak__IDKon__47DBAE45">
             <End Role="tblKunde" EntitySet="tblKunde" />
             <End Role="tblKontakt" EntitySet="tblKontakt" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblKonto__IDKont__4AB81AF0" Association="Self.FK__tblKonto__IDKont__4AB81AF0">
+          <AssociationSet Name="FK__tblKonto__IDKont__4BAC3F29" Association="Self.FK__tblKonto__IDKont__4BAC3F29">
             <End Role="tblKunde" EntitySet="tblKunde" />
             <End Role="tblKonto" EntitySet="tblKonto" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblKredit__FKKun__31EC6D26" Association="Self.FK__tblKredit__FKKun__31EC6D26">
+          <AssociationSet Name="FK__tblKredit__FKKun__32E0915F" Association="Self.FK__tblKredit__FKKun__32E0915F">
+            <End Role="tblKunde" EntitySet="tblKunde" />
+            <End Role="tblKredit" EntitySet="tblKredit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblKredit__IDKre__31EC6D26" Association="Self.FK__tblKredit__IDKre__31EC6D26">
             <End Role="tblKunde" EntitySet="tblKunde" />
             <End Role="tblKredit" EntitySet="tblKredit" />
           </AssociationSet>
@@ -427,13 +443,12 @@
             <End Role="tblKunde" EntitySet="tblKunde" />
             <End Role="tblLogin" EntitySet="tblLogin" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblOrt__FKLand__440B1D61" Association="Self.FK__tblOrt__FKLand__440B1D61">
+          <AssociationSet Name="FK__tblOrt__FKLand__44FF419A" Association="Self.FK__tblOrt__FKLand__44FF419A">
             <End Role="tblLand" EntitySet="tblLand" />
             <End Role="tblOrt" EntitySet="tblOrt" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbOnlineKreditModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -541,10 +556,10 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FKKunde" Type="Int32" />
-          <Property Name="Betrag" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Betrag" Type="Int32" Nullable="false" />
           <Property Name="Laufzeit" Type="Int16" Nullable="false" />
           <Property Name="KreditBewilligt" Type="Boolean" />
-          <NavigationProperty Name="Kunde" Relationship="Self.FK__tblKredit__FKKun__31EC6D26" FromRole="tblKredit" ToRole="tblKunde" />
+          <NavigationProperty Name="Kunde" Relationship="dbOnlineKreditModel.FK__tblKredit__IDKre__31EC6D26" FromRole="Kredit" ToRole="Kunde" />
         </EntityType>
         <EntityType Name="Kunde">
           <Key>
@@ -570,11 +585,11 @@
           <NavigationProperty Name="Identifikationsart" Relationship="Self.FK__tblKunde__FKIden__276EDEB3" FromRole="tblKunde" ToRole="tblIdentifikationsart" />
           <NavigationProperty Name="Kontakt" Relationship="Self.FK__tblKontak__IDKon__46E78A0C" FromRole="tblKunde" ToRole="tblKontakt" />
           <NavigationProperty Name="Konto" Relationship="Self.FK__tblKonto__IDKont__4AB81AF0" FromRole="tblKunde" ToRole="tblKonto" />
-          <NavigationProperty Name="Kredit" Relationship="Self.FK__tblKredit__FKKun__31EC6D26" FromRole="tblKunde" ToRole="tblKredit" />
           <NavigationProperty Name="Titel" Relationship="Self.FK__tblKunde__FKTite__239E4DCF" FromRole="tblKunde" ToRole="tblTitel" />
           <NavigationProperty Name="Wohnart" Relationship="Self.FK__tblKunde__FKWohn__25869641" FromRole="tblKunde" ToRole="tblWohnart" />
           <NavigationProperty Name="Land" Relationship="Self.FK__tblKunde__Staats__286302EC" FromRole="tblKunde" ToRole="tblLand" />
           <NavigationProperty Name="Login" Relationship="Self.FK__tblLogin__IDLogi__2F10007B" FromRole="tblKunde" ToRole="tblLogin" />
+          <NavigationProperty Name="Kredit" Relationship="dbOnlineKreditModel.FK__tblKredit__IDKre__31EC6D26" FromRole="Kunde" ToRole="Kredit" />
         </EntityType>
         <EntityType Name="Land">
           <Key>
@@ -895,7 +910,23 @@
             <End Role="tblLand" EntitySet="alleLänder" />
             <End Role="tblOrt" EntitySet="alleOrte" />
           </AssociationSet>
+          <AssociationSet Name="FK__tblKredit__IDKre__31EC6D26" Association="dbOnlineKreditModel.FK__tblKredit__IDKre__31EC6D26">
+            <End Role="Kunde" EntitySet="alleKunden" />
+            <End Role="Kredit" EntitySet="alleKredite" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK__tblKredit__IDKre__31EC6D26">
+          <End Type="dbOnlineKreditModel.Kunde" Role="Kunde" Multiplicity="1" />
+          <End Type="dbOnlineKreditModel.Kredit" Role="Kredit" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Kunde">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Kredit">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

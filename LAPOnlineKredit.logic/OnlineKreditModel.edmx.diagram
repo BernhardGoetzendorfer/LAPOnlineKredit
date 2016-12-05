@@ -38,6 +38,7 @@
         <AssociationConnector Association="dbOnlineKreditModel.FK__tblKunde__Staats__286302EC" ManuallyRouted="false" />
         <AssociationConnector Association="dbOnlineKreditModel.FK__tblLogin__IDLogi__2F10007B" ManuallyRouted="false" />
         <AssociationConnector Association="dbOnlineKreditModel.FK__tblOrt__FKLand__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="dbOnlineKreditModel.FK__tblKredit__IDKre__31EC6D26" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

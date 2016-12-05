@@ -16,7 +16,7 @@ namespace LAPOnlineKredit.logic
     {
         public int ID { get; set; }
         public Nullable<int> FKKunde { get; set; }
-        public decimal Betrag { get; set; }
+        public int Betrag { get; set; }
         public short Laufzeit { get; set; }
         public Nullable<bool> KreditBewilligt { get; set; }
     

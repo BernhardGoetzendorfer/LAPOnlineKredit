@@ -14,11 +14,6 @@ namespace LAPOnlineKredit.logic
     
     public partial class Kunde
     {
-        public Kunde()
-        {
-            this.Kredit = new HashSet<Kredit>();
-        }
-    
         public int ID { get; set; }
         public Nullable<int> FKTitel { get; set; }
         public Nullable<int> FKFamilienstand { get; set; }
@@ -40,10 +35,10 @@ namespace LAPOnlineKredit.logic
         public virtual Identifikationsart Identifikationsart { get; set; }
         public virtual Kontakt Kontakt { get; set; }
         public virtual Konto Konto { get; set; }
-        public virtual ICollection<Kredit> Kredit { get; set; }
         public virtual Titel Titel { get; set; }
         public virtual Wohnart Wohnart { get; set; }
         public virtual Land Land { get; set; }
         public virtual Login Login { get; set; }
+        public virtual Kredit Kredit { get; set; }
     }
 }
