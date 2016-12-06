@@ -219,6 +219,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\icons\general\" />
     <Folder Include="Content\img\icons\social\" />
+    <Folder Include="Views\KonsumKredit\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
