@@ -124,6 +124,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ArbeitgeberModel.cs" />
+    <Compile Include="Models\BeschaeftigungsArtModel.cs" />
+    <Compile Include="Models\BildungsModel.cs" />
+    <Compile Include="Models\BrancheModel.cs" />
+    <Compile Include="Models\FamilienStandModel.cs" />
+    <Compile Include="Models\FinanzielleSituationModel.cs" />
+    <Compile Include="Models\IdentifikationsModel.cs" />
+    <Compile Include="Models\KontaktDatenModel.cs" />
+    <Compile Include="Models\KontoInformationenModel.cs" />
+    <Compile Include="Models\KreditRahmenModel.cs" />
+    <Compile Include="Models\NachschlageFeldModel.cs" />
+    <Compile Include="Models\PersoenlicheDatenModel.cs" />
+    <Compile Include="Models\StaatsbuergerschaftsModel.cs" />
+    <Compile Include="Models\TitelModel.cs" />
+    <Compile Include="Models\WohnartModel.cs" />
+    <Compile Include="Models\ZusammenfassungModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -202,7 +218,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\icons\general\" />
     <Folder Include="Content\img\icons\social\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
