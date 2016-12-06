@@ -11,8 +11,8 @@ namespace LAPOnlineKredit.web.Controllers
 {
     public class KonsumKreditController : Controller
     {
-
-        // GET: KonsumKredit
+        
+        [HttpGet]
         public ActionResult KreditRahmen()
         {
             Debug.WriteLine("GET - KonsumKredit - KreditRahmen");
@@ -35,7 +35,27 @@ namespace LAPOnlineKredit.web.Controllers
           return View(kreditModel);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken] //Notwendig für den HttpCookie
+        public ActionResult KreditRahmen(KreditRahmenModel kreditModel)
+        {
+            Debug.WriteLine("POST, KonsumKreditController, KreditRahmen");
 
+            if(ModelState.IsValid) // Schaut ob im kreditModel alles Gültig ist. (bzw ob irgendwelche error dort aufgetaucht sind.)
+            {
+                if(Request.Cookies["idkunde"] == null) //Wird ausgeführt wenn es kein "bestehender Kunde" ist.
+                {
+                    Kunde neuerKunde = KonsumKreditVerwaltung.ErzeugeKunde(); //Erzeuge neuen Kunden.
+
+
+
+                }
+
+            }
+
+
+            return null;
+        }
 
 
 
