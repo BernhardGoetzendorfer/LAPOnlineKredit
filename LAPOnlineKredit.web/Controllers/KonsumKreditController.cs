@@ -11,7 +11,7 @@ namespace LAPOnlineKredit.web.Controllers
 {
     public class KonsumKreditController : Controller
     {
-        
+
         [HttpGet]
         public ActionResult KreditRahmen()
         {
@@ -32,7 +32,7 @@ namespace LAPOnlineKredit.web.Controllers
                 kreditModel.GewünschterBetrag = wunschKredit.Betrag; //Es werden die bereits vorhandenen Daten von der DB in das kreditModel geladen.
                 kreditModel.Laufzeit = wunschKredit.Laufzeit;
             }
-          return View(kreditModel);
+            return View(kreditModel);
         }
 
         [HttpPost]
@@ -41,24 +41,31 @@ namespace LAPOnlineKredit.web.Controllers
         {
             Debug.WriteLine("POST, KonsumKreditController, KreditRahmen");
 
-            if(ModelState.IsValid) // Schaut ob im kreditModel alles Gültig ist. (bzw ob irgendwelche error dort aufgetaucht sind.)
+            if (ModelState.IsValid) // Schaut ob im kreditModel alles Gültig ist. (bzw ob irgendwelche error dort aufgetaucht sind.)
             {
-                if(Request.Cookies["idkunde"] == null) //Wird ausgeführt wenn es kein "bestehender Kunde" ist.
+                if (Request.Cookies["idkunde"] == null) //Wird ausgeführt wenn es kein "bestehender Kunde" ist.
                 {
                     Kunde neuerKunde = KonsumKreditVerwaltung.ErzeugeKunde(); //Erzeuge neuen Kunden.
 
-
+                    if (neuerKunde != null && KonsumKreditVerwaltung.KreditRahmenSpeichern(kreditModel.GewünschterBetrag, kreditModel.Laufzeit, neuerKunde.ID))
+                    {
+                        Response.Cookies.Add(new HttpCookie("idkunde", neuerKunde.ID.ToString())); //Nimm die idkunde und speichere diese in die cookies.
+                        return RedirectToAction("FinanzielleSituation");
+                    }
 
                 }
+                else //sonst nimm den bestehenden Kunden und bring ihn zur FinanziellenSituation
+                {
+                    int idkunde = int.Parse(Request.Cookies["idkunde"].Value);
 
+                    if (KonsumKreditVerwaltung.KreditRahmenSpeichern(kreditModel.GewünschterBetrag, kreditModel.Laufzeit, idkunde))
+                    {
+                        return RedirectToAction("FinanzielleSituation");
+                    }
+                }
             }
-
-
-            return null;
-        }
-
-
-
+            return View(kreditModel); //Falls das Modelstate nicht Gültig ist bleib hier und forder erneute Dateneingabe
+        } 
 
 
 
