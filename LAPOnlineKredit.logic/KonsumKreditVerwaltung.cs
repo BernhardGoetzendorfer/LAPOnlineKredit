@@ -101,5 +101,129 @@ namespace LAPOnlineKredit.logic
             return erfolgreich;
         }
         
-    }
+
+        public static FinanzielleSituation FinanzielleSituationLaden(int id) //Methoden zum Laden sämtlicher FinanzielleSituation Daten der mitgegebenen ID
+        {
+            Debug.WriteLine("KonsumKReditVerwaltung, FinanzielleSituationLaden");
+
+            FinanzielleSituation finanzielleSituation = null;
+
+            try
+            {
+                using (var context = new OnlineKreditEntities())
+                {
+                    finanzielleSituation = context.alleFinanzielleSituationen.Where(x => x.ID == id).FirstOrDefault(); //Lade alle Daten aus der Datenbank mit der 
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler in FinanzielleSituationLaden");
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+
+            }
+
+            return finanzielleSituation;
+        }
+
+
+        //Speichert die Daten vom FinanzielleSituation Formular zum entsprechenden Kunden ab, wenn erfolgreich(true)
+        public static bool FinanzielleSituationSpeichern(double nettoEinkommen, double ratenVerpflichtungen, double wohnkosten, double einkünfteAlimenteUnterhalt, double unterhaltsZahlungen, int idKunde)
+        {
+            Debug.WriteLine("KonsumKreditVerwaltung, FinanzielleSituationSpeichern");
+
+            bool erfolgreich = false;
+
+            try
+            {
+                using (var context = new OnlineKreditEntities())
+                {
+                    Kunde aktuellerKunde = context.alleKunden.Where(x => x.ID == idKunde).FirstOrDefault(); //Suche nach Kunden mit aktueller id
+
+                    if (aktuellerKunde != null) 
+                    {
+                        FinanzielleSituation finanzielleSituation = context.alleFinanzielleSituationen.FirstOrDefault(x => x.ID == idKunde);
+
+                        if(finanzielleSituation == null) //Wenns noch keinen Kunden gibt, erstell einen
+                        {
+                            finanzielleSituation = new FinanzielleSituation();
+                            context.alleFinanzielleSituationen.Add(finanzielleSituation);
+                        }
+
+                        //Wenns schon einen Kunden gibt, trage die Daten von der Datenbank ein (im Formular)
+
+                        finanzielleSituation.MonatsEinkommen = (decimal)nettoEinkommen;
+                        finanzielleSituation.SonstigeAusgaben = (decimal)unterhaltsZahlungen;
+                        finanzielleSituation.SonstigeEinkommen = (decimal)einkünfteAlimenteUnterhalt;
+                        finanzielleSituation.Wohnkosten = (decimal)wohnkosten;
+                        finanzielleSituation.Raten = (decimal)ratenVerpflichtungen;
+                        finanzielleSituation.ID = idKunde;
+
+                        int anzahlZeilenBetroffen = context.SaveChanges();
+                        erfolgreich = anzahlZeilenBetroffen >= 0; //Wenn alles geklappt hat liefert die Methode true zurück
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+
+            return erfolgreich;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
 }

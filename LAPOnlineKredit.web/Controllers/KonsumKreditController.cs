@@ -12,7 +12,7 @@ namespace LAPOnlineKredit.web.Controllers
     public class KonsumKreditController : Controller
     {
 
-        [HttpGet]
+        [HttpGet] //Wird aufgerufen, wenn /KreditRahmen geladen wird
         public ActionResult KreditRahmen()
         {
             Debug.WriteLine("GET - KonsumKredit - KreditRahmen");
@@ -35,7 +35,7 @@ namespace LAPOnlineKredit.web.Controllers
             return View(kreditModel);
         }
 
-        [HttpPost]
+        [HttpPost] //Wird aufgerufen, wenn /KreditRahmen zu einer anderen View geht. (Wenn das Formular abgeschickt wird)
         [ValidateAntiForgeryToken] //Notwendig für den HttpCookie
         public ActionResult KreditRahmen(KreditRahmenModel kreditModel)
         {
@@ -68,17 +68,53 @@ namespace LAPOnlineKredit.web.Controllers
         } 
 
 
+        [HttpGet]
+        public ActionResult FinanzielleSituatuion()
+        {
+            Debug.WriteLine("Get, Konsumkredit, FinanzielleSituation");
+
+            FinanzielleSituationModel finanzModel = new FinanzielleSituationModel() //FinanzielleSituationModel muss jetzt mit Daten gefüttert werden, anschließend kann ich die ID übergeben.
+            {
+                ID_Kunde = int.Parse(Request.Cookies["idKunde"].Value)
+            };
+
+            FinanzielleSituation fSituation = KonsumKreditVerwaltung.FinanzielleSituationLaden(finanzModel.ID_Kunde); //Es wird geschaut ob mit der ID_Kunde schon ein Eintrag in der DAtenbank ist
+            if (fSituation != null)
+            {
+                finanzModel.NettoEinkommen = (double)fSituation.MonatsEinkommen;
+                finanzModel.SonstigesEinkommen = (double)fSituation.SonstigeEinkommen;
+                finanzModel.Wohnkosten = (double)fSituation.Wohnkosten;
+                finanzModel.SonstigeAusgaben = (double)fSituation.SonstigeAusgaben;
+                finanzModel.Raten = (double)fSituation.Raten;
+            }
+            return View(finanzModel);
+        }
 
 
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult FinanzielleSituation(FinanzielleSituationModel finanzModel)
+        {
+            Debug.WriteLine("POST, KonsumKreditController, FinanzielleSituation");
 
+            if(ModelState.IsValid)
+            {
+                if(KonsumKreditVerwaltung.FinanzielleSituationSpeichern(
+                                        finanzModel.NettoEinkommen,
+                                        finanzModel.Raten,
+                                        finanzModel.Wohnkosten,
+                                        finanzModel.SonstigesEinkommen,
+                                        finanzModel.SonstigeAusgaben,
+                                        finanzModel.ID_Kunde))
+                {
+                    return RedirectToAction("PersönlicheDaten");
+                }
+                    
+            }
 
-
-
-
-
-
-
+            return View(finanzModel);
+        }
 
 
 
