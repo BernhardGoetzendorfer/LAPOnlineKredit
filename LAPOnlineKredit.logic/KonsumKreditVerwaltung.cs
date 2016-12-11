@@ -364,6 +364,69 @@ namespace LAPOnlineKredit.logic
             return titel;
         }
 
+        // Suche anhand der ID den Kunden. Liefere alle Persönliche Daten oder null zurück.
+        public static Kunde PersönlicheDatenLaden(int id)
+        {
+            Debug.WriteLine("KonsumKreditVerwaltung, PersönlicheDatenLaden");
+
+            Kunde persönlicheDaten = null;
+
+            try
+            {
+                using (var context = new OnlineKreditEntities())
+                {
+                    persönlicheDaten = context.alleKunden.Where(x => x.ID == id).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+            
+            return persönlicheDaten;
+        }
+
+
+        public static bool PersönlicheDatenSpeichern(int? idTitel, string geschlecht, DateTime geburtsDatum, string vorname, string nachname, int idBildung, int idFamilienstand, int idIdentifikationsart, string identifikationsNummer, string idStaatsbuergerschaft, int idWohnart, int idKunde)
+        {
+            Debug.WriteLine("KonsumKReditVerwaltung, PersönlicheDatenSpeichern");
+
+            var erfolgreich = false;
+
+            try
+            {
+                using (var context = new OnlineKreditEntities())
+                {
+                    Kunde aktuellerKunde = context.alleKunden.Where(x => x.ID == idKunde).FirstOrDefault();
+
+                    if (aktuellerKunde != null) // Daten werden aus dem Formular genommen und in die Datenbank gespeichert
+                    {
+                        aktuellerKunde.Vorname = vorname;
+                        aktuellerKunde.Nachname = nachname;
+                        aktuellerKunde.FKFamilienstand = idFamilienstand;
+                        aktuellerKunde.FKAbschluss = idBildung;
+                        aktuellerKunde.Staatsbuergerschaft = idStaatsbuergerschaft;
+                        aktuellerKunde.FKTitel = idTitel;
+                        aktuellerKunde.FKIdentifikationsart = idIdentifikationsart;
+                        aktuellerKunde.Identifikationsnummer = identifikationsNummer;
+                        aktuellerKunde.Geschlecht = geschlecht;
+                        aktuellerKunde.FKWohnart = idWohnart;
+                    }
+
+                    int anzahlZeilenBetroffen = context.SaveChanges();
+                    erfolgreich = anzahlZeilenBetroffen >= 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+
+            return erfolgreich;
+        }
 
 
 
@@ -388,12 +451,5 @@ namespace LAPOnlineKredit.logic
 
 
 
-
-
-
-
-
-
-
-    }
+        }
 }

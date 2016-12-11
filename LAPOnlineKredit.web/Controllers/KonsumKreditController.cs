@@ -131,7 +131,7 @@ namespace LAPOnlineKredit.web.Controllers
 
 
             //Aus den sämtlichen Lookup Tabellen werden hier die Daten geladen und anschließend dem User im Formular als Dropdown angezeigt.
-            
+
             foreach (var bildungsAngabe in KonsumKreditVerwaltung.AbschluesseLaden()) //Schleife zum druchlaufen aller Daten
             {
                 alleBildungsAngaben.Add(new BildungsModel() //Solange Daten vorhanden sind werden diese durchlaufen und zu alleBildungsAngaben hinzugefügt
@@ -186,22 +186,68 @@ namespace LAPOnlineKredit.web.Controllers
                 });
             }
 
+            // Hier hole ich die Listen aus dem Model und befülle sie mit dem inhalt der zuvor durchlaufenen schleifen(Listen) 
+            // Jetzt liegen die Daten aus der Datenbank in der BL(AlleBildungAngaben) und können verwendet werden.
             PersoenlicheDatenModel model = new PersoenlicheDatenModel()
             {
-                
+                AlleBildungAngaben = alleBildungsAngaben,
+                AlleFamilienStandAngaben = alleFamilienStandAngaben,
+                AlleIdentifikationsAngaben = alleIdentifikationsAngaben,
+                AlleStaatsbuergerschaftsAngaben = alleStaatsbuergerschaftsAngaben,
+                AlleTitelAngaben = alleTitelAngaben,
+                AlleWohnartAngaben = alleWohnartAngaben,
+                ID_Kunde = int.Parse(Request.Cookies["idKunde"].Value)
             };
 
 
+            Kunde kunde = KonsumKreditVerwaltung.PersönlicheDatenLaden(model.ID_Kunde); //Lade von einem Kunden alle Persönlichen Daten
+            if (kunde != null) //Wenn es den Kunden schon gibt, lade die Daten aus der Datenbank
+            {
+                model.Geschlecht = !string.IsNullOrEmpty(kunde.Geschlecht) && kunde.Geschlecht == "m" ? Geschlecht.Männlich : Geschlecht.Weiblich; //Wenn Geschlecht gleich m ist dann .Männlich sonst .Weiblich
+                model.Vorname = kunde.Vorname;
+                model.Nachname = kunde.Nachname;
+                model.ID_Titel = kunde.FKTitel.HasValue ? kunde.FKTitel.Value : 0; //Wenn FKTitel einen Wert hat nimm diesen, sonst 0
+                model.ID_Staatsbuergerschaft = kunde.Staatsbuergerschaft;
+                model.ID_Familienstand = kunde.FKFamilienstand.HasValue ? kunde.FKFamilienstand.Value : 0;
+                model.ID_Wohnart = kunde.FKWohnart.HasValue ? kunde.FKWohnart.Value : 0;
+                model.ID_Bildung = kunde.FKAbschluss.HasValue ? kunde.FKAbschluss.Value : 0;
+                model.ID_Identifikationsart = kunde.FKIdentifikationsart.HasValue ? kunde.FKIdentifikationsart.Value : 0;
+                model.IdentifikationsNummer = kunde.Identifikationsnummer;
+            }
 
-            return null;
+            return View(model);
         }
 
 
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PersönlicheDaten(PersoenlicheDatenModel model)
+        {
+            Debug.WriteLine("POST - KonsumKredit - PersönlicheDaten");
 
-
-
-
+            if (ModelState.IsValid)
+            {
+                /// speichere Daten über BusinessLogic
+                if (KonsumKreditVerwaltung.PersönlicheDatenSpeichern(
+                                                model.ID_Titel,
+                                                model.Geschlecht == Geschlecht.Männlich ? "m" : "w", //Wenn Geschlecht Männlich, dann "m", ansonsten "w"
+                                                model.GeburtsDatum,
+                                                model.Vorname,
+                                                model.Nachname,
+                                                model.ID_Bildung,
+                                                model.ID_Familienstand,
+                                                model.ID_Identifikationsart,
+                                                model.IdentifikationsNummer,
+                                                model.ID_Staatsbuergerschaft,
+                                                model.ID_Wohnart,
+                                                model.ID_Kunde))
+                {
+                    return RedirectToAction("Arbeitgeber");
+                }
+            }
+            return View();
+        }
 
 
 
