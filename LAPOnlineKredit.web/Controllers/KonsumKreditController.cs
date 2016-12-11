@@ -249,13 +249,75 @@ namespace LAPOnlineKredit.web.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Arbeitgeber()
+        {
+            Debug.WriteLine("GET, KonsumKreditController, Arbeitgeber");
+
+            List<BeschaeftigungsArtModel> beschaeftigungen = new List<BeschaeftigungsArtModel>();
+            List<BrancheModel> branchen = new List<BrancheModel>();
+
+            //Durchlaufe die Datenbank einträge und speicher diese in unserer Liste zB branchen[0] = "Informatik"
+            foreach (var branche in KonsumKreditVerwaltung.BranchenLaden())
+            {
+                branchen.Add(new BrancheModel()
+                {
+                    ID = branche.ID.ToString(),
+                    Bezeichnung = branche.Bezeichnung
+                });
+            }
+
+            foreach (var beschaeftigungsArt in KonsumKreditVerwaltung.BeschaeftigungsArtenLaden())
+            {
+                beschaeftigungen.Add(new BeschaeftigungsArtModel()
+                {
+                    ID = beschaeftigungsArt.ID.ToString(),
+                    Bezeichnung = beschaeftigungsArt.Bezeichnung
+                });
+            }
+
+            ArbeitgeberModel arbeitgeberModel = new ArbeitgeberModel()
+            {
+                AlleBeschaeftigungen = beschaeftigungen, //Speicher die zuvor erzeugt Liste in die BL und verwend diese später weiter
+                AlleBranchen = branchen,
+                ID_Kunde = int.Parse(Request.Cookies["idKunde"].Value)
+            };
+
+            //Alle vorhandenen daten zum aktuellen Kunden werden geladen, od
+            Arbeitgeber arbeitgeberDaten = KonsumKreditVerwaltung.ArbeitgeberDatenLaden(arbeitgeberModel.ID_Kunde);
+
+            //Wenn Daten vorhanden sind übergib sie dem Model und anschließend der View
+            if(arbeitgeberDaten != null)
+            {
+                arbeitgeberModel.BeschäftigtSeit = arbeitgeberDaten.BeschaeftigtSeit.Value.ToString("MM.yyyy");
+                arbeitgeberModel.FirmenName = arbeitgeberDaten.Firmenname;
+                arbeitgeberModel.ID_BeschäftigungsArt = arbeitgeberDaten.FKBeschaeftigungsArt.Value;
+                arbeitgeberModel.ID_Branche = arbeitgeberDaten.FKBranche.Value;
+            }
 
 
+            return View(arbeitgeberModel);
+        }
 
+        // Nimm die Daten der Arbeitgeber View, speicher sie zum aktuellen Kunden in die DB.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Arbeitgeber(ArbeitgeberModel arbeitgeberModel)
+        {
+            Debug.WriteLine("POST, KonsumKreditController, Arbeitgeber");
 
+            if(ModelState.IsValid) //Wenn die Daten übereinstimmen/ keine Fehler liefern
+            {
+                //Speichere die Daten von der View/dem Formular in die DB
 
+                if (KonsumKreditVerwaltung.ArbeitgeberDatenSpeichern(arbeitgeberModel.FirmenName, arbeitgeberModel.ID_BeschäftigungsArt, arbeitgeberModel.ID_Branche, arbeitgeberModel.BeschäftigtSeit, arbeitgeberModel.ID_Kunde);
+                {
+                    return RedirectToAction("KontoInformationen");
+                }
+            }
 
-
+            return View();
+        }
 
 
 

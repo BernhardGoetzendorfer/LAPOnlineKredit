@@ -5,7 +5,7 @@ using System.Web;
 
 namespace LAPOnlineKredit.web.Models
 {
-    public class BrancheModel
+    public class BrancheModel : NachschlageFeldModel
     {
     }
 }

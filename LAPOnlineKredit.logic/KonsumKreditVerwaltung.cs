@@ -428,9 +428,75 @@ namespace LAPOnlineKredit.logic
             return erfolgreich;
         }
 
+        //Läd die Arbeitgeberangaben zum Kunden mit der ID
+        public static Arbeitgeber ArbeitgeberDatenLaden(int id)
+        {
+            Debug.WriteLine("KonsumKreditVerwaltung, ArbeitgeberAngabenLaden");
 
+            Arbeitgeber arbeitgeber = null;
 
+            try
+            {
+                using (var context = new OnlineKreditEntities())
+                {
+                    arbeitgeber = context.alleArbeitgeber.Where(x => x.ID == id).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+                
+            }
 
+            return arbeitgeber;
+        }
+
+        //Methode zum Speichern der ArbeitgeberDaten zur ID des Kunden
+        public static bool ArbeitgeberDatenSpeichern(string firmenname, int idBeschaeftigungsart, int idbranche, string beschaeftigtSeit, int idKunde)
+        {
+            Debug.WriteLine("KonsumKReditVerwaltung, ArbeitgeberDatenSpeichern");
+
+            bool erfolgreich = false;
+
+            try
+            {
+                using (var context = new OnlineKreditEntities())
+                {
+                    Kunde aktuellerKunde = context.alleKunden.Where(x => x.ID == idKunde).FirstOrDefault();
+
+                    if(aktuellerKunde != null)
+                    {
+                        Arbeitgeber arbeitgeber = context.alleArbeitgeber.FirstOrDefault();
+
+                        if (arbeitgeber == null) //Wenn es mit der aktuellen ID vom Kunden noch keine Daten zum Arbeitgeber gibt, erstell einen neuen. Sonst lade sie aus der DB
+                        {
+                            arbeitgeber = new Arbeitgeber();
+                            context.alleArbeitgeber.Add(arbeitgeber);
+                        }
+
+                        //Speichere die Daten vom Formular in die Datenbank
+                        arbeitgeber.BeschaeftigtSeit = DateTime.Parse(beschaeftigtSeit);
+                        arbeitgeber.FKBranche = idbranche;
+                        arbeitgeber.FKBeschaeftigungsArt = idBeschaeftigungsart;
+                        arbeitgeber.Firmenname = firmenname;
+
+                        aktuellerKunde.Arbeitgeber = arbeitgeber;
+                    }
+
+                    int anzahlZeilenBetroffen = context.SaveChanges();
+                    erfolgreich = anzahlZeilenBetroffen >= 0;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+
+            return erfolgreich;
+        }
 
 
 

@@ -26,6 +26,7 @@ namespace LAPOnlineKredit.web.Models
         [Display(Name = "Seit wann sind Sie beschäftigt? (MM.YYYY)")]
         public string BeschäftigtSeit { get; set; }
 
+        //In die Listen kommen Später die Lookup Tabellen aus der Datenbank - Dropdown in der View
         public List<BeschaeftigungsArtModel> AlleBeschaeftigungen { get; set; }
         public List<BrancheModel> AlleBranchen { get; set; }
 
