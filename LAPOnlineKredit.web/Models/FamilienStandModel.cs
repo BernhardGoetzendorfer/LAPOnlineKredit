@@ -5,7 +5,7 @@ using System.Web;
 
 namespace LAPOnlineKredit.web.Models
 {
-    public class FamilienStandModel
+    public class FamilienStandModel : NachschlageFeldModel
     {
     }
 }

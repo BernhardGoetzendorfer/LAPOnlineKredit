@@ -65,7 +65,7 @@ namespace LAPOnlineKredit.logic
         public static bool KreditRahmenSpeichern(int Betrag, int laufzeit, int idKunde)
         {
             Debug.WriteLine("KonsumKreditVerwaltung, KreditRahmenSpeichern");
-
+            
             bool erfolgreich = false; //Unser return wert, wird im lauf des programmes verändert
 
             try
@@ -76,7 +76,7 @@ namespace LAPOnlineKredit.logic
 
                     if (aktuellerKunde != null)
                     {
-                        Kredit wunschKredit = context.alleKredite.First(x => x.ID == idKunde);  // Schaue ob der Kunde bereits einene Betrag gewählt hat den er beantragen möchte.
+                        Kredit wunschKredit = context.alleKredite.FirstOrDefault(x => x.ID == idKunde);  // Schaue ob der Kunde bereits einene Betrag gewählt hat den er beantragen möchte.
 
                         if (wunschKredit == null) //Wenn es noch keinen Kredit gibt leg einen neuen an.
                         {
@@ -88,8 +88,8 @@ namespace LAPOnlineKredit.logic
                         wunschKredit.Laufzeit = (short)laufzeit;
                         wunschKredit.ID = idKunde;
                     }
-                    int betroffeneZeilen = context.SaveChanges();
-                    erfolgreich = betroffeneZeilen >= 0; // Speichere die Daten in die Datenbank.
+                    int betroffeneZeilen = context.SaveChanges(); // Speichere die Daten in die Datenbank.
+                    erfolgreich = betroffeneZeilen >= 0; 
                 }
             }
             catch (Exception ex)
@@ -173,57 +173,227 @@ namespace LAPOnlineKredit.logic
             return erfolgreich;
         }
 
+        // Liefert alle Branchen aus der Datenbank oder null zurück
+        public static List<Branche> BranchenLaden()
+        {
+            Debug.WriteLine("KosnumKreditVerwaltung, BranchenLaden");
 
+            List<Branche> branchen = null; // Erzeuge leere Liste
 
+            try
+            {
+                using (var context = new OnlineKreditEntities())
+                {
+                    branchen = context.alleBranchen.ToList(); //Speichere alle Brachen von der Datenbank in unsere Liste branchen
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            return branchen;
         }
+
+
+        // Liefert alle BeschaeftigungsArten aus der Datenbank oder null zurück
+        public static List<BeschaeftigungsArt> BeschaeftigungsArtenLaden()
+        {
+            Debug.WriteLine("KosnumKreditVerwaltung, BeschaeftigungsArtenLaden");
+
+            List<BeschaeftigungsArt> beschaeftigungsArten = null; 
+
+            try
+            {
+                using (var context = new OnlineKreditEntities())
+                {
+                    beschaeftigungsArten = context.alleBeschaeftigungsArten.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+
+            return beschaeftigungsArten;
+        }
+
+
+        // Liefert alle Abschlüsse aus der Datenbank oder null zurück
+        public static List<Abschluss> AbschluesseLaden()
+        {
+            Debug.WriteLine("KosnumKreditVerwaltung, AbschluesseLaden");
+
+            List<Abschluss> abschluesse = null;
+
+            try
+            {
+                using (var context = new OnlineKreditEntities())
+                {
+                    abschluesse = context.alleAbschluesse.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+
+            return abschluesse;
+        }
+
+
+        // Liefert alle FamilienStandAngaben aus der Datenbank oder null zurück
+        public static List<Familienstand> FamilienStandAngabenLaden()
+        {
+            Debug.WriteLine("KosnumKreditVerwaltung, FamilienStandAngabenLaden");
+
+            List<Familienstand> familienstand = null;
+
+            try
+            {
+                using (var context = new OnlineKreditEntities())
+                {
+                    familienstand = context.alleFamilienstandAngaben.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+
+            return familienstand;
+        }
+
+
+        // Liefert alle Länder aus der Datenbank oder null zurück
+        public static List<Land> LaenderLaden()
+        {
+            Debug.WriteLine("KosnumKreditVerwaltung, LaenderLaden");
+
+            List<Land> laender = null;
+
+            try
+            {
+                using (var context = new OnlineKreditEntities())
+                {
+                    laender = context.alleLänder.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+
+            return laender;
+        }
+
+
+        // Liefert alle Länder aus der Datenbank oder null zurück
+        public static List<Wohnart> WohnartenLaden()
+        {
+            Debug.WriteLine("KosnumKreditVerwaltung, WohnartenLaden");
+
+            List<Wohnart> wohnarten = null;
+
+            try
+            {
+                using (var context = new OnlineKreditEntities())
+                {
+                    wohnarten = context.alleWohnarten.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+
+            return wohnarten;
+        }
+
+
+        // Liefert alle Identifikiations Angaben aus der Datenbank oder null zurück
+        public static List<Identifikationsart> IdentifikiationsAngabenLaden()
+        {
+            Debug.WriteLine("KosnumKreditVerwaltung, IdentifikiationsAngabenLaden");
+
+            List<Identifikationsart> identifikationsArten = null;
+
+            try
+            {
+                using (var context = new OnlineKreditEntities())
+                {
+                    identifikationsArten = context.alleIdentifikationsarten.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+
+            return identifikationsArten;
+        }
+
+
+        // Liefert alle Titel Angaben aus der Datenbank oder null zurück
+        public static List<Titel> TitelLaden()
+        {
+            Debug.WriteLine("KosnumKreditVerwaltung, TitelLaden");
+
+            List<Titel> titel = null;
+
+            try
+            {
+                using (var context = new OnlineKreditEntities())
+                {
+                    titel = context.alleTitel.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+
+            return titel;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
 }

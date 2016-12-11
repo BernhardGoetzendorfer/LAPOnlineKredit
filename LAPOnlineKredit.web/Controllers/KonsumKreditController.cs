@@ -69,7 +69,7 @@ namespace LAPOnlineKredit.web.Controllers
 
 
         [HttpGet]
-        public ActionResult FinanzielleSituatuion()
+        public ActionResult FinanzielleSituation()
         {
             Debug.WriteLine("Get, Konsumkredit, FinanzielleSituation");
 
@@ -116,8 +116,85 @@ namespace LAPOnlineKredit.web.Controllers
             return View(finanzModel);
         }
 
+        [HttpGet]
+        public ActionResult PersönlicheDaten()
+        {
+            Debug.WriteLine("GET, KonsumKreditController");
+
+            //Listen 
+            List<BildungsModel> alleBildungsAngaben = new List<BildungsModel>();
+            List<FamilienStandModel> alleFamilienStandAngaben = new List<FamilienStandModel>();
+            List<IdentifikationsModel> alleIdentifikationsAngaben = new List<IdentifikationsModel>();
+            List<StaatsbuergerschaftsModel> alleStaatsbuergerschaftsAngaben = new List<StaatsbuergerschaftsModel>();
+            List<TitelModel> alleTitelAngaben = new List<TitelModel>();
+            List<WohnartModel> alleWohnartAngaben = new List<WohnartModel>();
 
 
+            //Aus den sämtlichen Lookup Tabellen werden hier die Daten geladen und anschließend dem User im Formular als Dropdown angezeigt.
+            
+            foreach (var bildungsAngabe in KonsumKreditVerwaltung.AbschluesseLaden()) //Schleife zum druchlaufen aller Daten
+            {
+                alleBildungsAngaben.Add(new BildungsModel() //Solange Daten vorhanden sind werden diese durchlaufen und zu alleBildungsAngaben hinzugefügt
+                {
+                    ID = bildungsAngabe.ID.ToString(),
+                    Bezeichnung = bildungsAngabe.Bezeichnung
+                });
+            }
+
+            foreach (var familienStand in KonsumKreditVerwaltung.FamilienStandAngabenLaden())
+            {
+                alleFamilienStandAngaben.Add(new FamilienStandModel()
+                {
+                    ID = familienStand.ID.ToString(),
+                    Bezeichnung = familienStand.Bezeichnung
+                });
+            }
+
+            foreach (var identifikationsAngabe in KonsumKreditVerwaltung.IdentifikiationsAngabenLaden())
+            {
+                alleIdentifikationsAngaben.Add(new IdentifikationsModel()
+                {
+                    ID = identifikationsAngabe.ID.ToString(),
+                    Bezeichnung = identifikationsAngabe.Bezeichnung
+                });
+            }
+
+            foreach (var land in KonsumKreditVerwaltung.LaenderLaden())
+            {
+                alleStaatsbuergerschaftsAngaben.Add(new StaatsbuergerschaftsModel()
+                {
+                    ID = land.ID,
+                    Bezeichnung = land.Bezeichnung
+                });
+            }
+
+            foreach (var titel in KonsumKreditVerwaltung.TitelLaden())
+            {
+                alleTitelAngaben.Add(new TitelModel()
+                {
+                    ID = titel.ID.ToString(),
+                    Bezeichnung = titel.Bezeichnung
+                });
+            }
+
+            foreach (var wohnart in KonsumKreditVerwaltung.WohnartenLaden())
+            {
+                alleWohnartAngaben.Add(new WohnartModel()
+                {
+                    ID = wohnart.ID.ToString(),
+                    Bezeichnung = wohnart.Bezeichnung
+                });
+            }
+
+            PersoenlicheDatenModel model = new PersoenlicheDatenModel()
+            {
+                
+            };
+
+
+
+            return null;
+        }
 
 
 

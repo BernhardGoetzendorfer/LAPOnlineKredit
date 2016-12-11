@@ -5,7 +5,7 @@ using System.Web;
 
 namespace LAPOnlineKredit.web.Models
 {
-    public class StaatsbuergerschaftsModel
+    public class StaatsbuergerschaftsModel : NachschlageFeldModel
     {
     }
 }

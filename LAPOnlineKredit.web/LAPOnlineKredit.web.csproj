@@ -169,7 +169,6 @@
     <Content Include="Content\img\glyphicons-halflings.png" />
     <Content Include="Content\script\bootstrap-datetimepicker.min.js" />
     <Content Include="Content\script\bootstrap-select.js" />
-    <Content Include="Content\script\bootstrap.js" />
     <Content Include="Content\script\bootstrap.min.js" />
     <Content Include="Content\script\easing.js" />
     <Content Include="Content\script\ion.rangeSlider.js" />
@@ -182,7 +181,6 @@
     <Content Include="Content\script\modernizr.custom.97074.js" />
     <Content Include="Content\script\moment-with-locales.min.js" />
     <Content Include="Content\script\move-top.js" />
-    <Content Include="Content\script\npm.js" />
     <Content Include="Global.asax" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
@@ -218,6 +216,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\KonsumKredit\KreditRahmen.cshtml" />
+    <Content Include="Views\KonsumKredit\FinanzielleSituation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
