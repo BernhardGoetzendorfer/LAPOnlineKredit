@@ -310,7 +310,7 @@ namespace LAPOnlineKredit.web.Controllers
             {
                 //Speichere die Daten von der View/dem Formular in die DB
 
-                if (KonsumKreditVerwaltung.ArbeitgeberDatenSpeichern(arbeitgeberModel.FirmenName, arbeitgeberModel.ID_BeschäftigungsArt, arbeitgeberModel.ID_Branche, arbeitgeberModel.BeschäftigtSeit, arbeitgeberModel.ID_Kunde));
+                if (KonsumKreditVerwaltung.ArbeitgeberDatenSpeichern(arbeitgeberModel.FirmenName, arbeitgeberModel.ID_BeschäftigungsArt, arbeitgeberModel.ID_Branche, arbeitgeberModel.BeschäftigtSeit, arbeitgeberModel.ID_Kunde))
                 {
                     return RedirectToAction("KontoInformationen");
                 }
