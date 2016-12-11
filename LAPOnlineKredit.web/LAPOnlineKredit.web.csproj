@@ -218,6 +218,7 @@
     <Content Include="Views\KonsumKredit\KreditRahmen.cshtml" />
     <Content Include="Views\KonsumKredit\FinanzielleSituation.cshtml" />
     <Content Include="Views\KonsumKredit\PersönlicheDaten.cshtml" />
+    <Content Include="Views\KonsumKredit\Arbeitgeber.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

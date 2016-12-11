@@ -1,0 +1,95 @@
+﻿@model LAPOnlineKredit.web.Models.ArbeitgeberModel
+
+@{
+    ViewBag.Title = "Arbeitgeber";
+}
+
+<div id="content" style="margin-top: 20px">
+    <h2>Arbeitgeber Informationen</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.ID_Kunde)
+
+        <div class="form-horizontal">
+            <div class="row" style="margin-top: 20px">
+                <div class="col-lg-offset-4 col-md-offset-4 col-lg-6 col-md-6">
+                    Bitte tragen Sie in die unten stehenden Eingabefelder die Daten zu Ihrem aktuellen Arbeitgeber ein.
+                    <br /><br />
+                    lorem ipsum et dolorem lorem ipsum et dolorem lorem ipsum et dolorem lorem ipsum et dolorem lorem ipsum et dolorem lorem ipsum et dolorem
+                </div>
+            </div>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-lg-offset-1 col-md-offset-1 col-lg-3 col-md-3" style="text-align: right">
+                    @Html.LabelFor(model => model.FirmenName, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    @Html.TextBoxFor(model => model.FirmenName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FirmenName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-offset-1 col-md-offset-1 col-lg-3 col-md-3" style="text-align: right">
+                    @Html.LabelFor(model => model.ID_BeschäftigungsArt, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    @Html.DropDownListFor(model => model.ID_BeschäftigungsArt, new SelectList(Model.AlleBeschaeftigungen, "ID", "Bezeichnung"))
+                    @Html.ValidationMessageFor(model => model.ID_BeschäftigungsArt, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-offset-1 col-md-offset-1 col-lg-3 col-md-3" style="text-align: right">
+                    @Html.LabelFor(model => model.ID_Branche, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    @Html.DropDownListFor(model => model.ID_Branche, new SelectList(Model.AlleBranchen, "ID", "Bezeichnung"))
+                    @Html.ValidationMessageFor(model => model.ID_Branche, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-offset-1 col-md-offset-1 col-lg-3 col-md-3" style="text-align: right">
+                    @Html.LabelFor(model => model.BeschäftigtSeit, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class='input-group date'
+                         data-datepicker
+                         data-datepickermaxdate="now"
+                         data-datepickerformat="MM.YYYY"
+                         id="datePicker1">
+                        @Html.TextBoxFor(model => model.BeschäftigtSeit, new { @class = "form-control", placeholder = "mm.jjjj", id = "beschaeftigtSeit" })
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-offset-4 col-md-offset-4 col-lg-3 col-md-3">
+
+                    <input type="submit" value="Bestätigen" class="btn btn-default" />
+
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        // https://eonasdan.github.io/bootstrap-datetimepicker/
+
+        $(function () {
+            $('#datePicker1').datetimepicker({
+                format: 'MM.YYYY'
+            });
+        });
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+}
