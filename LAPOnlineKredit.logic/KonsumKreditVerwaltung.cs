@@ -499,23 +499,98 @@ namespace LAPOnlineKredit.logic
         }
 
 
+        public static Konto KontoInformationenLaden(int id)
+        {
+            Debug.WriteLine("KonsumKreditVerwaltung - KontoInformationenLaden");
+            Debug.Indent();
 
+            Konto kontoDaten = null;
 
+            try
+            {
+                using (var context = new OnlineKreditEntities())
+                {
+                    kontoDaten = context.alleKonten.Where(x => x.ID == id).FirstOrDefault();
+                    Debug.WriteLine("KontoInformationen geladen!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler in KontoInformationenLaden");
+                Debug.Indent();
+                Debug.WriteLine(ex.Message);
+                Debug.Unindent();
+                Debugger.Break();
+            }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            Debug.Unindent();
+            return kontoDaten;
         }
+
+        public static bool KontoInformationenSpeichern(string bankName, string iban, string bic, bool neuesKonto, int idKunde)
+        {
+            Debug.WriteLine("KonsumKreditVerwaltung - KontoInformationenSpeichern");
+            Debug.Indent();
+
+            bool erfolgreich = false;
+
+            try
+            {
+                using (var context = new OnlineKreditEntities())
+                {
+
+                    /// speichere zum Kunden die Angaben
+                    Kunde aktKunde = context.alleKunden.Where(x => x.ID == idKunde).FirstOrDefault();
+
+                    if (aktKunde != null)
+                    {
+                        Konto kontoDaten = context.alleKonten .FirstOrDefault(x => x.ID == idKunde);
+
+                        if (kontoDaten == null)
+                        {
+                            kontoDaten = new Konto();
+                            context.alleKonten.Add(kontoDaten);
+                        }
+                        kontoDaten.Bankname = bankName;
+                        kontoDaten.IBAN = iban;
+                        kontoDaten.BIC = bic;
+                        kontoDaten.IstKunde = !neuesKonto;
+                        kontoDaten.ID = idKunde;
+                    }
+
+                    int anzahlZeilenBetroffen = context.SaveChanges();
+                    erfolgreich = anzahlZeilenBetroffen >= 0;
+                    Debug.WriteLine($"{anzahlZeilenBetroffen} Konto-Daten gespeichert!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler in KontoInformationenSpeichern");
+                Debug.Indent();
+                Debug.WriteLine(ex.Message);
+                Debug.Unindent();
+                Debugger.Break();
+            }
+
+            Debug.Unindent();
+            return erfolgreich;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
 }
