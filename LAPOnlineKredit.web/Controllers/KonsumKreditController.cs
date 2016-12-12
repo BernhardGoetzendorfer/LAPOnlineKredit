@@ -337,6 +337,7 @@ namespace LAPOnlineKredit.web.Controllers
                 model.BIC = daten.BIC;
                 model.IBAN = daten.IBAN;
                 model.NeuesKonto = !daten.IstKunde.Value;
+                model.KreditkartenNummer = daten.Kreditkartennummer;
             }
             return View(model);
         }
@@ -355,7 +356,8 @@ namespace LAPOnlineKredit.web.Controllers
                                                 model.IBAN,
                                                 model.BIC,
                                                 model.NeuesKonto,
-                                                model.ID_Kunde))
+                                                model.ID_Kunde,
+                                                model.KreditkartenNummer))
                 {
                     return RedirectToAction("Zusammenfassung");
                 }

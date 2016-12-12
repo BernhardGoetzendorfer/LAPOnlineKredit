@@ -163,7 +163,8 @@ create table tblKonto
 	KreditArt varchar(30),
 	IstKunde bit default 0,
 	IBAN varchar(30),
-	BIC varchar(30)
+	BIC varchar(30),
+	Kreditkartennummer varchar(30)
 )
 go
 
@@ -282,16 +283,16 @@ go
 
 insert into tblKonto
 values
-(1, '', 'Konsumkredit', 0, '', ''),
-(2, 'Sparkassa', 'Konsumkredit', 1, '12890390128391', 'asd1203912'),
-(3, '', 'Konsumkredit', 0, '', '')
+(1, '', 'Konsumkredit', 0, '', '', '1892731289'),
+(2, 'Sparkassa', 'Konsumkredit', 1, '12890390128391', 'asd1203912', '1892731289'),
+(3, '', 'Konsumkredit', 0, '', '', '1892731289')
 go
 
-insert into tblKredit(FKKunde, Betrag, Laufzeit, KreditBewilligt)
+insert into tblKredit
 values
-(1, 500, 12, 1),
-(2, 1500, 24, 1),
-(3, 2500, 18, 0)
+(1, 1, 500, 12, 1),
+(2, 2, 1500, 24, 1),
+(3, 3, 2500, 18, 0)
 go
 
 insert into tblArbeitgeber

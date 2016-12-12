@@ -20,6 +20,7 @@ namespace LAPOnlineKredit.logic
         public Nullable<bool> IstKunde { get; set; }
         public string IBAN { get; set; }
         public string BIC { get; set; }
+        public string Kreditkartennummer { get; set; }
     
         public virtual Kunde Kunde { get; set; }
     }

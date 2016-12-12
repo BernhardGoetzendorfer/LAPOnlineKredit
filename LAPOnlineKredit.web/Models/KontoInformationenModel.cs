@@ -20,5 +20,7 @@ namespace LAPOnlineKredit.web.Models
         [StringLength(20, ErrorMessage = "max. 20 Zeichen erlaubt")]
         public string BIC { get; set; }
 
+        [StringLength(20, ErrorMessage = "max. 30 Zeichen erlaubt")]
+        public string KreditkartenNummer { get; set; }
     }
 }

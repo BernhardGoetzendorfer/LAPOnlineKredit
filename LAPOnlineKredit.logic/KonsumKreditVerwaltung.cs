@@ -527,7 +527,7 @@ namespace LAPOnlineKredit.logic
             return kontoDaten;
         }
 
-        public static bool KontoInformationenSpeichern(string bankName, string iban, string bic, bool neuesKonto, int idKunde)
+        public static bool KontoInformationenSpeichern(string bankName, string iban, string bic, bool neuesKonto, int idKunde, string kreditkartennummer)
         {
             Debug.WriteLine("KonsumKreditVerwaltung - KontoInformationenSpeichern");
             Debug.Indent();
@@ -556,6 +556,7 @@ namespace LAPOnlineKredit.logic
                         kontoDaten.BIC = bic;
                         kontoDaten.IstKunde = !neuesKonto;
                         kontoDaten.ID = idKunde;
+                        kontoDaten.Kreditkartennummer = kreditkartennummer;
                     }
 
                     int anzahlZeilenBetroffen = context.SaveChanges();

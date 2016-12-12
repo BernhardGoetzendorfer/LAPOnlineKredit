@@ -90,6 +90,7 @@
           <Property Name="IstKunde" Type="bit" />
           <Property Name="IBAN" Type="varchar" MaxLength="30" />
           <Property Name="BIC" Type="varchar" MaxLength="30" />
+          <Property Name="Kreditkartennummer" Type="varchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="tblKredit">
           <Key>
@@ -549,6 +550,7 @@
           <Property Name="IBAN" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="BIC" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Kunde" Relationship="Self.FK__tblKonto__IDKont__4AB81AF0" FromRole="tblKonto" ToRole="tblKunde" />
+          <Property Name="Kreditkartennummer" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Kredit">
           <Key>
@@ -1020,6 +1022,7 @@
           <EntitySetMapping Name="alleKonten">
             <EntityTypeMapping TypeName="dbOnlineKreditModel.Konto">
               <MappingFragment StoreEntitySet="tblKonto">
+                <ScalarProperty Name="Kreditkartennummer" ColumnName="Kreditkartennummer" />
                 <ScalarProperty Name="ID" ColumnName="IDKonto" />
                 <ScalarProperty Name="Bankname" ColumnName="Bankname" />
                 <ScalarProperty Name="KreditArt" ColumnName="KreditArt" />
