@@ -328,8 +328,19 @@ namespace LAPOnlineKredit.web.Controllers
             {
                 ID_Kunde = int.Parse(Request.Cookies["idkunde"].Value)
             };
-            
 
+            if (ModelState.IsValid)
+            {
+                if(KonsumKreditVerwaltung.KontoInformationenSpeichern(
+                                                    kontoInfoModel.BankName,
+                                                    kontoInfoModel.BIC,
+                                                    kontoInfoModel.IBAN,
+                                                    kontoInfoModel.NeuesKonto,
+                                                    kontoInfoModel.ID_Kunde))
+            {
+                return RedirectToAction("Zusammenfassung");
+            }
+        }
 
 
 

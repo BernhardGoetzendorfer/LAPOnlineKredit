@@ -522,7 +522,48 @@ namespace LAPOnlineKredit.logic
             return konto; //Liefert das Konto mit den KontoDaten zurück - zur KundenID
         }
 
+        public static bool KontoInformationenSpeichern(string bankname, string iban, string bic, bool neuesKonto, int idkunde)
+        {
+            Debug.WriteLine("KonsumKreditVerwaltung, KontoInformationenSpeichern");
 
+            bool erfolgreich = false;
+
+            try
+            {
+                using (var context = new OnlineKreditEntities()) // Baut eine Verbindung zur DB auf und speichert anschließend die mitgegebenen parameter/variablen zum Kunden ab.
+                {
+                    Kunde aktuellerKunde = context.alleKunden.Where(x => x.ID == idkunde).FirstOrDefault();
+
+                    if (aktuellerKunde != null) //in den Feldern der View müssen Daten stehen!
+                    {
+                        Konto kontoDaten = context.alleKonten.Where(x => x.ID == idkunde).FirstOrDefault();
+
+                        if (kontoDaten == null) // Wenn es zu dem Kunden noch keine Daten gibt, erzeug ein Dummy
+                        {
+                            kontoDaten = new Konto();
+                            context.alleKonten.Add(kontoDaten);
+                        }
+                        // Sonst überschreib die alten Daten mit den neuen (Aus der View/Formular)
+
+                        kontoDaten.Bankname = bankname;
+                        kontoDaten.BIC = bic;
+                        kontoDaten.IBAN = iban;
+                        kontoDaten.KreditArt = "KonsumKredit";
+                        kontoDaten.IstKunde = !neuesKonto;
+                        kontoDaten.ID = idkunde;
+                    }
+
+                    int anzahlZeilenBetroffen = context.SaveChanges(); //Speicher die Änderungen in die Datenbank
+                    erfolgreich = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+            return erfolgreich;
+        }
 
 
 
