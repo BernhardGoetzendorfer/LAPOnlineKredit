@@ -499,7 +499,28 @@ namespace LAPOnlineKredit.logic
         }
 
 
+        //Methode zum Laden der KontoInformationen. KundenID muss mitgegeben werden.
+        public static Konto KontoInformationenLaden(int kundenID)
+        {
+            Debug.WriteLine("KonsumKreditVerwaltung, KontoInformationenLaden");
 
+            Konto konto = null;  //leeres Konto erzeugt
+
+            try
+            {
+                using (var context = new OnlineKreditEntities()) //Baue die Verbindung zur Datenbank auf.
+                {
+                    konto = context.alleKonten.Where(x => x.ID == kundenID).FirstOrDefault(); //Lade alle Konto Daten von der KundenID
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+
+            return konto; //Liefert das Konto mit den KontoDaten zurück - zur KundenID
+        }
 
 
 

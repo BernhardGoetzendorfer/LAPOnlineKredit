@@ -319,9 +319,22 @@ namespace LAPOnlineKredit.web.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult KontoInformationen()
+        {
+            Debug.WriteLine("GET, KonsumKreditController, KontoInformationen");
+
+            KontoInformationenModel kontoInfoModel = new KontoInformationenModel()
+            {
+                ID_Kunde = int.Parse(Request.Cookies["idkunde"].Value)
+            };
+            
 
 
 
+
+            return View();
+        }
 
 
 
