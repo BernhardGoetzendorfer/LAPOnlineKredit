@@ -287,11 +287,11 @@ values
 (3, '', 'Konsumkredit', 0, '', '')
 go
 
-insert into tblKredit(FKKunde, Betrag, Laufzeit, KreditBewilligt)
+insert into tblKredit
 values
-(1, 500, 12, 1),
-(2, 1500, 24, 1),
-(3, 2500, 18, 0)
+(1, 1, 500, 12, 1),
+(2, 2, 1500, 24, 1),
+(3, 3, 2500, 18, 0)
 go
 
 insert into tblArbeitgeber
