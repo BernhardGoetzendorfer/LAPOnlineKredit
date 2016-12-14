@@ -349,7 +349,15 @@ namespace LAPOnlineKredit.web.Controllers
             Debug.WriteLine("GET, KonsumKreditController, Zusammenfassung");
 
             // Find für den aktuellen Kunden ALLE Daten und übergib sie dem Zusammenfassungs Model
-            
+
+            ZusammenfassungModel zusammenfassungsModel = new ZusammenfassungModel(); //Erzeuge eine instanz aus dem Model
+
+            zusammenfassungsModel.ID_Kunde = int.Parse(Request.Cookies["idkunde"].ToString()); //Hol die die ID aus dem Cookie und arbeite mit diesem Kunden weiter.
+
+            //Jetzt lade ALLE Daten die zum Kunden gehören aus der Datenbank in unser Model, das anschließend der View gegeben wird.
+
+            Kunde aktuellerKunde = KonsumKreditVerwaltung.KundeLaden(zusammenfassungsModel.ID_Kunde); // führ die Methode KundeLaden aus und speichere die Rückgabe nach aktuellerKunde
+
 
 
 

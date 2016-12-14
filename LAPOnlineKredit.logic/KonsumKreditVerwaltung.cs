@@ -41,6 +41,44 @@ namespace LAPOnlineKredit.logic
         }
 
 
+        //Läd alle Daten zum Kunden der mitgegebenen ID
+        public static Kunde KundeLaden(int id)
+        {
+            Debug.WriteLine("KonsumKreditVerwaltung, KundeLaden");
+
+            Kunde aktuellerKunde = null;
+
+            try
+            {
+                using (var context = new OnlineKreditEntities()) //Bau die Verbindung zu all den Tabellen auf. 
+                {
+                    aktuellerKunde = context.alleKunden
+                                        .Include("Arbeitgeber")
+                                        .Include("Arbeitgeber.BeschaeftigungsArt")
+                                        .Include("Arbeitgeber.Branche")
+                                        .Include("Familienstand")
+                                        .Include("FinanzielleSituation")
+                                        .Include("IdentifikationsArt")
+                                        .Include("Kontakt")
+                                        .Include("Konto")
+                                        .Include("Kredit")
+                                        .Include("Abschluss")
+                                        .Include("Titel")
+                                        .Include("Wohnart")
+                                        .Include("Land")
+                                        .Where(x => x.ID == id).FirstOrDefault(); // Filter nur die Daten vom aktuellen Kunden raus.
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+            return aktuellerKunde; // liefere den Kunden mit allen dazugehörigen Daten zurück
+        }
+
+
         public static Kredit KreditRahmenLaden(int id)
         {
             Debug.WriteLine("KonsumKreditVerwaltung, KreditRahmenLaden");
