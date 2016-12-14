@@ -315,7 +315,6 @@ namespace LAPOnlineKredit.web.Controllers
                     return RedirectToAction("KontoInformationen");
                 }
             }
-
             return View();
         }
 
@@ -341,26 +340,26 @@ namespace LAPOnlineKredit.web.Controllers
                 return RedirectToAction("Zusammenfassung");
             }
         }
+        return View();
+        }
+        
+        [HttpGet]
+        public ActionResult Zusammenfassung()
+        {
+            Debug.WriteLine("GET, KonsumKreditController, Zusammenfassung");
+
+            // Find für den aktuellen Kunden ALLE Daten und übergib sie dem Zusammenfassungs Model
+            
+
+
+
+
+
 
 
 
             return View();
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
