@@ -369,7 +369,7 @@ namespace LAPOnlineKredit.web.Controllers
 
             List<WohnortModel> orte = new List<WohnortModel>();
 
-            //Durchlaufe die Datenbank einträge und speicher diese in unserer Liste zB branchen[0] = "Informatik"
+            //Durchlaufe die Datenbank einträge und speicher diese in unserer Liste
             foreach (var ort in KonsumKreditVerwaltung.OrteLaden())
             {
                 orte.Add(new WohnortModel()
@@ -463,7 +463,7 @@ namespace LAPOnlineKredit.web.Controllers
 
             //Kunden Daten der KontaktDaten werden der Zusammenfassungs View übergeben.
             zusammenfassungsModel.Strasse = aktuellerKunde.Kontakt?.Strasse;
-            zusammenfassungsModel.Ort = aktuellerKunde.Kontakt?.Ort.Bezeichnung;
+            //zusammenfassungsModel.Ort = aktuellerKunde.Kontakt.Ort.Bezeichnung; //Not working right now.
             zusammenfassungsModel.Mail = aktuellerKunde.Kontakt?.eMail;
             zusammenfassungsModel.Telefonnummer = aktuellerKunde.Kontakt?.Telefonnummer;
 
