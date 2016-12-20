@@ -8,16 +8,16 @@ namespace LAPOnlineKredit.web.Models
 {
     public class ArbeitgeberModel
     {
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]
         [StringLength(30, ErrorMessage = "Maximal 30 Zeichen")]
         [Display(Name = "Ihr Firmenname")]
         public string FirmenName { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]
         [Display(Name = "Ihre Beschäftigungsart")]
         public int ID_BeschäftigungsArt { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]
         [Display(Name = "Ihre Branche")]
         public int ID_Branche { get; set; }
 

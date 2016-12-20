@@ -505,21 +505,22 @@ namespace LAPOnlineKredit.logic
 
                     if(aktuellerKunde != null)
                     {
-                        Arbeitgeber arbeitgeber = context.alleArbeitgeber.FirstOrDefault();
+                        Arbeitgeber arbeitgeber = aktuellerKunde.Arbeitgeber;
 
                         if (arbeitgeber == null) //Wenn es mit der aktuellen ID vom Kunden noch keine Daten zum Arbeitgeber gibt, erstell einen neuen. Sonst lade sie aus der DB
                         {
                             arbeitgeber = new Arbeitgeber();
                             context.alleArbeitgeber.Add(arbeitgeber);
+                            aktuellerKunde.Arbeitgeber = arbeitgeber;
                         }
 
                         //Speichere die Daten vom Formular in die Datenbank
-                        arbeitgeber.BeschaeftigtSeit = DateTime.Parse(beschaeftigtSeit);
+                        arbeitgeber.BeschaeftigtSeit = DateTime.Parse("1." + beschaeftigtSeit);
                         arbeitgeber.FKBranche = idbranche;
                         arbeitgeber.FKBeschaeftigungsArt = idBeschaeftigungsart;
                         arbeitgeber.Firmenname = firmenname;
 
-                        aktuellerKunde.Arbeitgeber = arbeitgeber;
+                       
                     }
 
                     int anzahlZeilenBetroffen = context.SaveChanges();

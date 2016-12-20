@@ -283,7 +283,7 @@ namespace LAPOnlineKredit.web.Controllers
                 ID_Kunde = int.Parse(Request.Cookies["idKunde"].Value)
             };
 
-            //Alle vorhandenen daten zum aktuellen Kunden werden geladen, od
+            //Alle vorhandenen daten zum aktuellen Kunden werden geladen
             Arbeitgeber arbeitgeberDaten = KonsumKreditVerwaltung.ArbeitgeberDatenLaden(arbeitgeberModel.ID_Kunde);
 
             //Wenn Daten vorhanden sind übergib sie dem Model und anschließend der View
@@ -317,6 +317,8 @@ namespace LAPOnlineKredit.web.Controllers
             }
             return View();
         }
+
+
 
         [HttpGet]
         public ActionResult KontoInformationen()
