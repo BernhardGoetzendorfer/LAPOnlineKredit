@@ -370,8 +370,8 @@ namespace LAPOnlineKredit.web.Controllers
             // Find für den aktuellen Kunden ALLE Daten und übergib sie dem Zusammenfassungs Model
 
             ZusammenfassungModel zusammenfassungsModel = new ZusammenfassungModel(); //Erzeuge eine instanz aus dem Model
-
-            zusammenfassungsModel.ID_Kunde = int.Parse(Request.Cookies["idkunde"].ToString()); //Hol die die ID aus dem Cookie und arbeite mit diesem Kunden weiter.
+            
+            zusammenfassungsModel.ID_Kunde = int.Parse(Request.Cookies["idKunde"].Value); //Hol die die ID aus dem Cookie und arbeite mit diesem Kunden weiter.
 
             //Jetzt lade ALLE Daten die zum Kunden gehören aus der Datenbank in unser Model, das anschließend der View gegeben wird.
 

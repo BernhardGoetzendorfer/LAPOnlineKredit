@@ -220,6 +220,7 @@
     <Content Include="Views\KonsumKredit\PersönlicheDaten.cshtml" />
     <Content Include="Views\KonsumKredit\Arbeitgeber.cshtml" />
     <Content Include="Views\KonsumKredit\KontoInformationen.cshtml" />
+    <Content Include="Views\KonsumKredit\Zusammenfassung.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
