@@ -121,14 +121,33 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KonsumKreditController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ArbeitgeberModel.cs" />
+    <Compile Include="Models\BeschaeftigungsArtModel.cs" />
+    <Compile Include="Models\BildungsModel.cs" />
+    <Compile Include="Models\BrancheModel.cs" />
+    <Compile Include="Models\FamilienStandModel.cs" />
+    <Compile Include="Models\FinanzielleSituationModel.cs" />
+    <Compile Include="Models\IdentifikationsModel.cs" />
+    <Compile Include="Models\KontaktDatenModel.cs" />
+    <Compile Include="Models\KontoInformationenModel.cs" />
+    <Compile Include="Models\KreditRahmenModel.cs" />
+    <Compile Include="Models\NachschlageFeldModel.cs" />
+    <Compile Include="Models\PersoenlicheDatenModel.cs" />
+    <Compile Include="Models\StaatsbuergerschaftsModel.cs" />
+    <Compile Include="Models\TitelModel.cs" />
+    <Compile Include="Models\WohnartModel.cs" />
+    <Compile Include="Models\ZusammenfassungModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\css\bootstrap-responsive.css" />
     <Content Include="Content\css\bootstrap-responsive.min.css" />
+    <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\chocolat.css" />
@@ -143,23 +162,38 @@
     <Content Include="Content\css\normalize.css" />
     <Content Include="Content\css\slideControl.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\img\bright-lights-big-city.jpg" />
     <Content Include="Content\img\glyphicons-halflings-white.png" />
     <Content Include="Content\img\glyphicons-halflings.png" />
-    <Content Include="Content\script\bootstrap.js" />
+    <Content Include="Content\script\bootstrap-datetimepicker.min.js" />
+    <Content Include="Content\script\bootstrap-select.js" />
     <Content Include="Content\script\bootstrap.min.js" />
     <Content Include="Content\script\easing.js" />
     <Content Include="Content\script\ion.rangeSlider.js" />
     <Content Include="Content\script\ion.rangeSlider.min.js" />
     <Content Include="Content\script\jquery-1.11.0.min.js" />
+    <Content Include="Content\script\jquery-3.1.1.min.js" />
     <Content Include="Content\script\jquery.chocolat.js" />
     <Content Include="Content\script\jquery.hoverdir.js" />
     <Content Include="Content\script\jquery.slideControl.js" />
     <Content Include="Content\script\modernizr.custom.97074.js" />
+    <Content Include="Content\script\moment-with-locales.min.js" />
     <Content Include="Content\script\move-top.js" />
-    <Content Include="Content\script\npm.js" />
     <Content Include="Global.asax" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Properties\PublishProfiles\j.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -181,16 +215,27 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\KonsumKredit\KreditRahmen.cshtml" />
+    <Content Include="Views\KonsumKredit\FinanzielleSituation.cshtml" />
+    <Content Include="Views\KonsumKredit\PersönlicheDaten.cshtml" />
+    <Content Include="Views\KonsumKredit\Arbeitgeber.cshtml" />
+    <Content Include="Views\KonsumKredit\KontoInformationen.cshtml" />
+    <Content Include="Views\KonsumKredit\Zusammenfassung.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\icons\general\" />
     <Folder Include="Content\img\icons\social\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LAPOnlineKredit.logic\LAPOnlineKredit.logic.csproj">
+      <Project>{ed2c73f0-b2e9-47f2-b375-60eb2aea8bf0}</Project>
+      <Name>LAPOnlineKredit.logic</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
