@@ -8,19 +8,20 @@ namespace LAPOnlineKredit.web.Models
 {
     public class ArbeitgeberModel
     {
-        //[Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]
         [StringLength(30, ErrorMessage = "Maximal 30 Zeichen")]
-        [Display(Name = "Ihr Firmenname")]
+        [Display(Name = "Der Name Ihrer Firma")]
         public string FirmenName { get; set; }
 
-        //[Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]
-        [Display(Name = "Ihre Beschäftigungsart")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]
+        [Display(Name = "Ihre Angestelltenverhältnis")]
         public int ID_BeschäftigungsArt { get; set; }
 
-        //[Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]
-        [Display(Name = "Ihre Branche")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]
+        [Display(Name = "Die Branche in der Sie Arbeiten")]
         public int ID_Branche { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true, DataFormatString = "MM.yyyy")]
         [Display(Name = "Seit wann sind Sie beschäftigt? (MM.YYYY)")]

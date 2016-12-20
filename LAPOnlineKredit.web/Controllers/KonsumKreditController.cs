@@ -318,33 +318,50 @@ namespace LAPOnlineKredit.web.Controllers
             return View();
         }
 
-
-
         [HttpGet]
         public ActionResult KontoInformationen()
         {
-            Debug.WriteLine("GET, KonsumKreditController, KontoInformationen");
+            Debug.WriteLine("GET, KonsumKredit, KontoInformationen");
 
             KontoInformationenModel kontoInfoModel = new KontoInformationenModel()
             {
-                ID_Kunde = int.Parse(Request.Cookies["idkunde"].Value)
+                ID_Kunde = int.Parse(Request.Cookies["idKunde"].Value) // Lade den Cookie und leg ihn in ID_Kunde
             };
+
+            Konto kontoDaten = KonsumKreditVerwaltung.KontoInformationenLaden(kontoInfoModel.ID_Kunde); //Lade alle vorhandenen Daten von KontoInformationen nach kontoDaten
+            if (kontoDaten != null)
+            {
+                kontoInfoModel.BankName = kontoDaten.Bankname;
+                kontoInfoModel.BIC = kontoDaten.BIC;
+                kontoInfoModel.IBAN = kontoDaten.IBAN;
+                kontoInfoModel.NeuesKonto = !kontoDaten.IstKunde.Value;
+            }
+            return View(kontoInfoModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult KontoInformationen(KontoInformationenModel model)
+        {
+            Debug.WriteLine("POST, KonsumKredit, KontoInformationen");
 
             if (ModelState.IsValid)
             {
-                if(KonsumKreditVerwaltung.KontoInformationenSpeichern(
-                                                    kontoInfoModel.BankName,
-                                                    kontoInfoModel.BIC,
-                                                    kontoInfoModel.IBAN,
-                                                    kontoInfoModel.NeuesKonto,
-                                                    kontoInfoModel.ID_Kunde))
-            {
-                return RedirectToAction("Zusammenfassung");
+                /// speichere Daten über BusinessLogic
+                if (KonsumKreditVerwaltung.KontoInformationenSpeichern(
+                                                model.BankName,
+                                                model.IBAN,
+                                                model.BIC,
+                                                model.NeuesKonto,
+                                                model.ID_Kunde))
+                {
+                    return RedirectToAction("Zusammenfassung");
+                }
             }
+
+            return View();
         }
-        return View();
-        }
-        
+
         [HttpGet]
         public ActionResult Zusammenfassung()
         {
@@ -360,15 +377,52 @@ namespace LAPOnlineKredit.web.Controllers
 
             Kunde aktuellerKunde = KonsumKreditVerwaltung.KundeLaden(zusammenfassungsModel.ID_Kunde); // führ die Methode KundeLaden aus und speichere die Rückgabe nach aktuellerKunde
 
+            //Kunden Daten des Kredites werden der Zusammenfassungs View übergeben.
+            zusammenfassungsModel.Betrag = aktuellerKunde.Kredit.Betrag;
+            zusammenfassungsModel.Laufzeit = aktuellerKunde.Kredit.Laufzeit;
+
+            //Kunden Daten der FinanziellenSituation werden der Zusammenfassungs View übergeben.
+            zusammenfassungsModel.Nettoeinkommen = (double)aktuellerKunde.FinanzielleSituation.MonatsEinkommen;
+            zusammenfassungsModel.Wohnkosten = (double)aktuellerKunde.FinanzielleSituation.Wohnkosten;
+            zusammenfassungsModel.SonstigesEinkommen = (double)aktuellerKunde.FinanzielleSituation.SonstigeEinkommen;
+            zusammenfassungsModel.SonstigeAusgaben = (double)aktuellerKunde.FinanzielleSituation.SonstigeAusgaben;
+            zusammenfassungsModel.Raten = (double)aktuellerKunde.FinanzielleSituation.Raten;
+
+            //Kunden Daten der KontoInformation werden der Zusammenfassungs View übergeben.
+            zusammenfassungsModel.Geschlecht = aktuellerKunde.Geschlecht == "m" ? "Herr" : "Frau";
+            zusammenfassungsModel.Vorname = aktuellerKunde.Vorname;
+            zusammenfassungsModel.Nachname = aktuellerKunde.Nachname;
+            zusammenfassungsModel.Titel = aktuellerKunde.Titel?.Bezeichnung; //? Weil es Null sein kann, Bezeichnung weil er sonst die ID anzeigt
+            zusammenfassungsModel.Geburtstag = aktuellerKunde.Geburtsdatum;
+            zusammenfassungsModel.Staatsbuergerschaft = aktuellerKunde.Staatsbuergerschaft;
+            zusammenfassungsModel.AnzahlUnterhaltpflichteKinder = -1;
+            zusammenfassungsModel.familienstand = aktuellerKunde.Familienstand?.Bezeichnung;
+            zusammenfassungsModel.Wohnart = aktuellerKunde.Wohnart?.Bezeichnung;
+            zusammenfassungsModel.Bildung = aktuellerKunde.Abschluss?.Bezeichnung;
+            zusammenfassungsModel.IdentifikationsArt = aktuellerKunde.Identifikationsart?.Bezeichnung;
+            zusammenfassungsModel.Identifikationsnummer = aktuellerKunde.Identifikationsnummer;
 
 
+            //Kunden Daten des Arbeitgebers werden der Zusammenfassungs View übergeben.
+            zusammenfassungsModel.Firmenname = aktuellerKunde.Arbeitgeber.Firmenname;
+            zusammenfassungsModel.BeschaeftigungsArt = aktuellerKunde.Arbeitgeber.BeschaeftigungsArt.Bezeichnung;
+            zusammenfassungsModel.Branche = aktuellerKunde.Arbeitgeber.Branche.Bezeichnung;
+            zusammenfassungsModel.BeschaeftigtSeit = aktuellerKunde.Arbeitgeber.BeschaeftigtSeit.Value.ToShortDateString();
 
+            //Kunden Daten der KontaktDaten werden der Zusammenfassungs View übergeben.
+            zusammenfassungsModel.Strasse = aktuellerKunde.Kontakt?.Strasse;
+            zusammenfassungsModel.Ort = aktuellerKunde.Kontakt?.Ort.Bezeichnung;
+            zusammenfassungsModel.Mail = aktuellerKunde.Kontakt?.eMail;
+            zusammenfassungsModel.Telefonnummer = aktuellerKunde.Kontakt?.Telefonnummer;
 
+            //Kunden Daten der KontoDaten werden der Zusammenfassungs View übergeben.
+            zusammenfassungsModel.NeuesKonto = aktuellerKunde.Konto.IstKunde.Value;
+            zusammenfassungsModel.Bankname = aktuellerKunde.Konto.Bankname;
+            zusammenfassungsModel.IBAN = aktuellerKunde.Konto.IBAN;
+            zusammenfassungsModel.BIC = aktuellerKunde.Konto.BIC;
+            
 
-
-
-
-            return View();
+            return View(zusammenfassungsModel);
         }
 
 
