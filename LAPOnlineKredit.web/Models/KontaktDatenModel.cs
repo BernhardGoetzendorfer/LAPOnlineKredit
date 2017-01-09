@@ -19,6 +19,7 @@ namespace LAPOnlineKredit.web.Models
 
         [Display(Name = "Emailadresse")]
         [Required]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Required]
