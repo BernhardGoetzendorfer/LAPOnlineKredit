@@ -604,19 +604,115 @@ namespace LAPOnlineKredit.logic
             return erfolgreich;
         }
 
+        public static Kontakt KontaktDatenLaden(int id) //Methode zum Laden sämtlicher KontaktDaten zur ID
+        {
+            Debug.WriteLine("KonsumKreditVerwaltung, KontaktDatenLaden");
 
+            Kontakt kontakt = null;
 
+            try
+            {
+                using (var context = new OnlineKreditEntities())
+                {
+                    kontakt = context.alleKontaktDaten.Where(x => x.ID == id).FirstOrDefault();
+                }
 
-
-
-
-
-
-
-
-
-
-
-
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+               
+            }
+            return kontakt;
         }
+
+
+        public static bool KontaktDatenSpeichern(int idOrt, string Strasse, string Email, string Telefonnummer, int idkunde) //Methode zum Speichern der KontaktDaten
+        {
+            Debug.WriteLine("KonsumKreditVerwaltung, KontoDatenSpeichern");
+
+            var erfolgreich = false;
+
+            try
+            {
+                using (var context = new OnlineKreditEntities())
+                {
+                    Kunde aktuellerKunde = context.alleKunden.Where(x => x.ID == idkunde).FirstOrDefault();
+
+                    if (aktuellerKunde != null)
+                    {
+                        Kontakt kontakt = aktuellerKunde.Kontakt;
+
+                        if (kontakt == null)
+                        {
+                            kontakt = new Kontakt();
+                            context.alleKontaktDaten.Add(kontakt);
+                            aktuellerKunde.Kontakt = kontakt;
+                        }
+
+                        kontakt.Strasse = Strasse;
+                        kontakt.FKOrt = idOrt;
+                        kontakt.Telefonnummer = Telefonnummer;
+                        kontakt.eMail = Email;
+                    }
+                    int anzahlZeilenBetroffen = context.SaveChanges();
+                    erfolgreich = anzahlZeilenBetroffen >= 0;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+
+
+            return erfolgreich;
+        }
+
+
+        // Liefert alle Orte aus der Datenbank oder null zurück
+        public static List<Ort> OrteLaden()
+        {
+            Debug.WriteLine("KosnumKreditVerwaltung, OrteLaden");
+
+            List<Ort> orte = null; // Erzeuge leere Liste
+
+            try
+            {
+                using (var context = new OnlineKreditEntities())
+                {
+                    orte = context.alleOrte.ToList(); //Speichere alle Orte von der Datenbank in unsere Liste orte
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+
+            return orte;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
 }

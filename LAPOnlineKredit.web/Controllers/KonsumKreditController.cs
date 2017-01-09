@@ -27,7 +27,7 @@ namespace LAPOnlineKredit.web.Controllers
             int id = -1; // ID wird mit null initialisiert
             if (Request.Cookies["idKunde"] != null && int.TryParse(Request.Cookies["idKunde"].Value, out id)) // Es wird geschaut ob in den Cookies schon eine idKunde vorhanden ist - mit der dann weitergearbeitet wird.
             {
-                /// Wenn er die ID im Cookie gefunden hat werden die Daten daraus geladen und angezeigt.
+                // Wenn er die ID im Cookie gefunden hat werden die Daten daraus geladen und angezeigt.
                 Kredit wunschKredit = KonsumKreditVerwaltung.KreditRahmenLaden(id);
                 kreditModel.GewünschterBetrag = wunschKredit.Betrag; //Es werden die bereits vorhandenen Daten von der DB in das kreditModel geladen.
                 kreditModel.Laufzeit = wunschKredit.Laufzeit;
@@ -52,8 +52,8 @@ namespace LAPOnlineKredit.web.Controllers
                         Response.Cookies.Add(new HttpCookie("idkunde", neuerKunde.ID.ToString())); //Nimm die idkunde und speichere diese in die cookies.
                         return RedirectToAction("FinanzielleSituation");
                     }
-
                 }
+
                 else //sonst nimm den bestehenden Kunden und bring ihn zur FinanziellenSituation
                 {
                     int idkunde = int.Parse(Request.Cookies["idkunde"].Value);
@@ -89,8 +89,7 @@ namespace LAPOnlineKredit.web.Controllers
             }
             return View(finanzModel);
         }
-
-
+        
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -355,12 +354,65 @@ namespace LAPOnlineKredit.web.Controllers
                                                 model.NeuesKonto,
                                                 model.ID_Kunde))
                 {
+                    return RedirectToAction("KontaktDaten");
+                }
+            }
+
+            return View();
+        }
+
+
+        [HttpGet]
+        public ActionResult KontaktDaten()
+        {
+            Debug.WriteLine("GET, KonsumKredit, KontaktDaten");
+
+            List<WohnortModel> orte = new List<WohnortModel>();
+
+            //Durchlaufe die Datenbank einträge und speicher diese in unserer Liste
+            foreach (var ort in KonsumKreditVerwaltung.OrteLaden())
+            {
+                orte.Add(new WohnortModel()
+                {
+                    ID = ort.ID.ToString(),
+                    Bezeichnung = ort.Bezeichnung
+                });
+            }
+
+
+            KontaktDatenModel model = new KontaktDatenModel()
+            {
+                ID_Kunde = int.Parse(Request.Cookies["idKunde"].Value)
+                
+            };
+
+            model.AlleWohnorte = orte;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult KontaktDaten(KontaktDatenModel model)
+        {
+            Debug.WriteLine("POST, KonsumKredit, KontaktDaten");
+
+            if (ModelState.IsValid)
+            {
+                /// speichere Daten über BusinessLogic
+                if (KonsumKreditVerwaltung.KontaktDatenSpeichern(
+                                                model.IDWohnort,
+                                                model.Strasse,
+                                                model.Email,
+                                                model.Telefonnummer,
+                                                model.ID_Kunde))
+                {
                     return RedirectToAction("Zusammenfassung");
                 }
             }
 
             return View();
         }
+
 
         [HttpGet]
         public ActionResult Zusammenfassung()
@@ -411,7 +463,7 @@ namespace LAPOnlineKredit.web.Controllers
 
             //Kunden Daten der KontaktDaten werden der Zusammenfassungs View übergeben.
             zusammenfassungsModel.Strasse = aktuellerKunde.Kontakt?.Strasse;
-            zusammenfassungsModel.Ort = aktuellerKunde.Kontakt?.Ort.Bezeichnung;
+            //zusammenfassungsModel.Ort = aktuellerKunde.Kontakt.Ort.Bezeichnung; //Not working right now.
             zusammenfassungsModel.Mail = aktuellerKunde.Kontakt?.eMail;
             zusammenfassungsModel.Telefonnummer = aktuellerKunde.Kontakt?.Telefonnummer;
 
@@ -422,7 +474,7 @@ namespace LAPOnlineKredit.web.Controllers
             zusammenfassungsModel.BIC = aktuellerKunde.Konto.BIC;
             
 
-            return View(zusammenfassungsModel);
+            return View(zusammenfassungsModel); //Liefere der View alle zuvor geladenen Daten 
         }
 
 

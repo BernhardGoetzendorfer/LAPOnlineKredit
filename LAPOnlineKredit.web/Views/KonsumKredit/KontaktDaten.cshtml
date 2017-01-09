@@ -1,0 +1,72 @@
+﻿@model LAPOnlineKredit.web.Models.KontaktDatenModel
+
+@{
+    ViewBag.Title = "KontaktDaten";
+}
+
+<div id="content" style="margin-top: 20px">
+    <h2>Kontakt Daten</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.ID_Kunde)
+
+        <div class="form-horizontal">
+            <div class="row" style="margin-top: 20px">
+                <div class="col-lg-offset-4 col-md-offset-4 col-lg-6 col-md-6">
+                   CHANGE THIS TEXT HERE
+                    <br /><br />
+                    lorem ipsum et dolorem lorem ipsum et dolorem lorem ipsum et dolorem lorem ipsum et dolorem lorem ipsum et dolorem lorem ipsum et dolorem
+                </div>
+            </div>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-lg-offset-1 col-md-offset-1 col-lg-3 col-md-3" style="text-align: right">
+                    @Html.LabelFor(model => model.Strasse, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    @Html.TextBoxFor(model => model.Strasse, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Strasse, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-offset-1 col-md-offset-1 col-lg-3 col-md-3" style="text-align: right">
+                    @Html.LabelFor(model => model.IDWohnort, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    @Html.DropDownListFor(model => model.IDWohnort, new SelectList(Model.AlleWohnorte, "ID", "Bezeichnung"))
+                    @Html.ValidationMessageFor(model => model.IDWohnort, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-offset-1 col-md-offset-1 col-lg-3 col-md-3" style="text-align: right">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-offset-1 col-md-offset-1 col-lg-3 col-md-3" style="text-align: right">
+                    @Html.LabelFor(model => model.Telefonnummer, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    @Html.TextBoxFor(model => model.Telefonnummer, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Telefonnummer, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-offset-4 col-md-offset-4 col-lg-3 col-md-3">
+
+                    <input type="submit" value="Bestätigen" class="btn btn-default" />
+
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

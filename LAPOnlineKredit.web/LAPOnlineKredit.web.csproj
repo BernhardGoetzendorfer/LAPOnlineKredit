@@ -140,6 +140,7 @@
     <Compile Include="Models\StaatsbuergerschaftsModel.cs" />
     <Compile Include="Models\TitelModel.cs" />
     <Compile Include="Models\WohnartModel.cs" />
+    <Compile Include="Models\WohnortModel.cs" />
     <Compile Include="Models\ZusammenfassungModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -221,6 +222,7 @@
     <Content Include="Views\KonsumKredit\Arbeitgeber.cshtml" />
     <Content Include="Views\KonsumKredit\KontoInformationen.cshtml" />
     <Content Include="Views\KonsumKredit\Zusammenfassung.cshtml" />
+    <Content Include="Views\KonsumKredit\KontaktDaten.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
