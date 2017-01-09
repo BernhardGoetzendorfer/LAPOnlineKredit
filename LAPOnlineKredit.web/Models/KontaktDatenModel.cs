@@ -18,6 +18,7 @@ namespace LAPOnlineKredit.web.Models
         public string Strasse { get; set; }
 
         [Display(Name = "Emailadresse")]
+        [DataType(DataType.EmailAddress, ErrorMessage ="hey")]
         public string Email { get; set; }
 
         [Required]
