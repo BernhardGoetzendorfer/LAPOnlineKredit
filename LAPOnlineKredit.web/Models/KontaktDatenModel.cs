@@ -18,7 +18,9 @@ namespace LAPOnlineKredit.web.Models
         public string Strasse { get; set; }
 
         [Display(Name = "Emailadresse")]
-        [DataType(DataType.EmailAddress, ErrorMessage ="hey")]
+        [Required]
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail is not valid")]
+        /* [DataType(DataType.EmailAddress, ErrorMessage ="hey")] */
         public string Email { get; set; }
 
         [Required]
