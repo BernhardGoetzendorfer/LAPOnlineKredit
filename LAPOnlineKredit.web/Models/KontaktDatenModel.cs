@@ -9,7 +9,7 @@ namespace LAPOnlineKredit.web.Models
 {
     public class KontaktDatenModel
     {
-        [Required]
+        
         [Display(Name = "Ihr Wohnort")]
         public int IDWohnort { get; set; }
 
@@ -19,8 +19,6 @@ namespace LAPOnlineKredit.web.Models
 
         [Display(Name = "Emailadresse")]
         [Required]
-        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail is not valid")]
-        /* [DataType(DataType.EmailAddress, ErrorMessage ="hey")] */
         public string Email { get; set; }
 
         [Required]
@@ -29,7 +27,6 @@ namespace LAPOnlineKredit.web.Models
 
         [HiddenInput(DisplayValue = false)]
         [Required]
-
         public int ID_Kunde { get; set; }
 
 

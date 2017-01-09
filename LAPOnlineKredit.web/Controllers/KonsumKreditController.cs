@@ -381,16 +381,23 @@ namespace LAPOnlineKredit.web.Controllers
                 });
             }
 
-
-            KontaktDatenModel model = new KontaktDatenModel()
+            KontaktDatenModel kontaktModel = new KontaktDatenModel()
             {
+                AlleWohnorte = orte,
                 ID_Kunde = int.Parse(Request.Cookies["idKunde"].Value)
-
             };
 
-            model.AlleWohnorte = orte;
 
-            return View(model);
+            Kontakt kontaktDaten = KonsumKreditVerwaltung.KontaktDatenLaden(kontaktModel.ID_Kunde);
+            if (kontaktDaten != null)
+            {
+                kontaktModel.Strasse = kontaktDaten.Strasse;
+                kontaktModel.Email = kontaktDaten.eMail;
+                kontaktModel.Telefonnummer = kontaktDaten.Telefonnummer;
+                kontaktModel.IDWohnort = kontaktDaten.FKOrt.Value;
+            } 
+
+            return View(kontaktModel);
         }
 
         [HttpPost]
