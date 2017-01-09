@@ -120,6 +120,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\FreigabeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KonsumKreditController.cs" />
     <Compile Include="Global.asax.cs">
@@ -223,6 +224,7 @@
     <Content Include="Views\KonsumKredit\KontoInformationen.cshtml" />
     <Content Include="Views\KonsumKredit\Zusammenfassung.cshtml" />
     <Content Include="Views\KonsumKredit\KontaktDaten.cshtml" />
+    <Content Include="Views\Freigabe\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -234,6 +236,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\freigabe\LAPOnlineKredit.freigabe.csproj">
+      <Project>{b73a05bf-be32-4e90-8c19-6d28ddb545f2}</Project>
+      <Name>LAPOnlineKredit.freigabe</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LAPOnlineKredit.logic\LAPOnlineKredit.logic.csproj">
       <Project>{ed2c73f0-b2e9-47f2-b375-60eb2aea8bf0}</Project>
       <Name>LAPOnlineKredit.logic</Name>

@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
-namespace freigabe
+namespace LAPOnlineKredit.freigabe
 {
-    class KreditFreigabe
+    public class KreditFreigabe
     {
         /// <summary>
         /// Gibt zurück ob für die angegebenen Daten eine Kreditfreigabe erteilt wird
