@@ -329,14 +329,25 @@ namespace LAPOnlineKredit.web.Controllers
                 ID_Kunde = int.Parse(Request.Cookies["idKunde"].Value) // Lade den Cookie und leg ihn in ID_Kunde
             };
 
-            Konto kontoDaten = KonsumKreditVerwaltung.KontoInformationenLaden(kontoInfoModel.ID_Kunde); //Lade alle vorhandenen Daten von KontoInformationen nach kontoDaten
-            if (kontoDaten != null)
+            Konto kontoDaten = KonsumKreditVerwaltung.KontoInformationenLaden(kontoInfoModel.ID_Kunde); //Erzeuge Kontodaten zur mitgegebenhen Kundenid
+            if (kontoDaten != null)//Lade alle vorhandenen Daten von KontoInformationen nach kontoDaten
             {
                 kontoInfoModel.BankName = kontoDaten.Bankname;
                 kontoInfoModel.BIC = kontoDaten.BIC;
                 kontoInfoModel.IBAN = kontoDaten.IBAN;
                 kontoInfoModel.NeuesKonto = !kontoDaten.IstKunde.Value;
             }
+
+            KreditKarte kreditkKartenDaten = KonsumKreditVerwaltung.KreditKartenDatenLaden(kontoInfoModel.ID_Kunde); //Erzeuge KreditkartenDaten zur mitgegebenhen Kundenid
+            if (kreditkKartenDaten != null) //Lade alle vorhandenen KreditKarten Daten vom Kunden zum Model (Schlussendlich in die View)
+            {
+                kontoInfoModel.KreditKartenInhaber = kreditkKartenDaten.Inhaber;
+                kontoInfoModel.KreditKartenNummer = kreditkKartenDaten.Nummer;
+                kontoInfoModel.KreditKartenGültigBis = kreditkKartenDaten.GueltigBis?.ToString("MM.yyyy");
+            }
+
+
+
             return View(kontoInfoModel);
         }
 

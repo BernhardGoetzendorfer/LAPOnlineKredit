@@ -82,6 +82,9 @@
     <Compile Include="Kredit.cs">
       <DependentUpon>OnlineKreditModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="KreditKarte.cs">
+      <DependentUpon>OnlineKreditModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Kunde.cs">
       <DependentUpon>OnlineKreditModel.tt</DependentUpon>
     </Compile>

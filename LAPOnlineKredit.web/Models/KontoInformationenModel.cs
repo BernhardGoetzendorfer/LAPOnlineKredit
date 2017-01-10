@@ -21,5 +21,18 @@ namespace LAPOnlineKredit.web.Models
         [StringLength(15, ErrorMessage = "max. 15 Zeichen erlaubt")]
         [MinLength(10, ErrorMessage = "min. 10 Zeichen erforderlich")]
         public string BIC { get; set; }
+
+        [StringLength(50, ErrorMessage = "max. 50 Zeichen erlaubt")]
+        public string KreditKartenInhaber { get; set; }
+
+        [StringLength(23, ErrorMessage = "max. 23 Zeichen erlaubt")]
+        public string KreditKartenNummer { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true, DataFormatString = "MM.yyyy")]
+        [Display(Name = "gültig bis")]
+        public string KreditKartenGültigBis { get; set; }
+
+
     }
 }

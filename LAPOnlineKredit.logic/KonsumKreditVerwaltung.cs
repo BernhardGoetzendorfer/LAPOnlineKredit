@@ -697,6 +697,132 @@ namespace LAPOnlineKredit.logic
 
 
 
+        //Implementation von KreditKarte
+
+        public static bool KreditKartenDatenSpeichern(string inhaber, string nummer, DateTime gültigBis, int idKunde) //Speichere die KreditKartenDaten
+        {
+            Debug.WriteLine("KonsumKreditVerwaltung, KreditKartenDatenSpeichern");
+
+            bool erfolgreich = false; //Returnwert, True wenn erfolgreich
+
+            try
+            {
+                using (var context = new OnlineKreditEntities())
+                {
+
+                    
+                    Kunde aktKunde = context.alleKunden.Where(x => x.ID == idKunde).FirstOrDefault(); // Speichere die Kreditkarten Daten zum mitgegebenen Kunden
+
+                    if (aktKunde != null) //Wenn es den Kunden schon gibt
+                    {
+                        KreditKarte kreditKartenDaten = context.alleKreditKarten.FirstOrDefault(x => x.ID == idKunde); //Such seine gespeicherten Daten 
+
+                        if (kreditKartenDaten == null) //Wenn er noch keine KreditkartenDaten hat, erzeuge welche
+                        {
+                            kreditKartenDaten = new KreditKarte();
+                            context.alleKreditKarten.Add(kreditKartenDaten);
+                        } //Ansonsten lade die Daten aus der datenbank in die View
+                        kreditKartenDaten.Inhaber = inhaber;
+                        kreditKartenDaten.Nummer = nummer;
+                        kreditKartenDaten.GueltigBis = gültigBis;
+                        kreditKartenDaten.ID = idKunde;
+                    }
+
+                    int anzahlZeilenBetroffen = context.SaveChanges();
+                    erfolgreich = anzahlZeilenBetroffen >= 0; //Wenn sich mehr als eine Zeile verändert hat ist erfolgreich true
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+            
+            return erfolgreich;
+
+        }
+
+
+        public static KreditKarte KreditKartenDatenLaden(int id) //Die Kreditkarte zu einem Kunden wird geladen.
+        {
+            Debug.WriteLine("KonsumKreditVerwaltung, KreditKartenDatenLaden");
+
+            KreditKarte kreditKartenDaten = null; // Neuer Kredit wird initializiert
+
+            try
+            {
+                using (var context = new OnlineKreditEntities()) //Baue die verbindung zur DB auf
+                {
+                    kreditKartenDaten = context.alleKreditKarten.Where(x => x.ID == id).FirstOrDefault(); //Such nach der KreditKarte zum Kunden der ID
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+            
+            return kreditKartenDaten; //Gib die Kreditkarte zum mitgelieferten User zurück
+        }
+
+
+        public static List<Kunde> KundenLaden()
+        {
+            Debug.WriteLine("KonsumKreditVerwaltung - KundenLaden");
+            Debug.Indent();
+
+            List<Kunde> alleKunden = null;
+
+            try
+            {
+                using (var context = new OnlineKreditEntities())
+                {
+                    alleKunden = context.alleKunden
+                        .Include("Arbeitgeber")
+                        .Include("Arbeitgeber.BeschaeftigungsArt")
+                        .Include("Arbeitgeber.Branche")
+                        .Include("Familienstand")
+                        .Include("FinanzielleSituation")
+                        .Include("IdentifikationsArt")
+                        .Include("KontaktDaten")
+                        .Include("KontoDaten")
+                        .Include("KreditWunsch")
+                        .Include("Schulabschluss")
+                        .Include("Titel")
+                        .Include("TitelNachstehend")
+                        .Include("Wohnart")
+                        .Include("Staatsangehoerigkeit")
+                        .Where(x => (x.Konto != null || x.KreditKarte != null))
+                        .OrderByDescending(x => x.ID)
+                        .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler in KundenLaden");
+                Debug.Indent();
+                Debug.WriteLine(ex.Message);
+                Debug.Unindent();
+                Debugger.Break();
+            }
+
+            Debug.Unindent();
+            return alleKunden;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

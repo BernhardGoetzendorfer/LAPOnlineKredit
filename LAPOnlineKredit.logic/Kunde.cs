@@ -40,5 +40,6 @@ namespace LAPOnlineKredit.logic
         public virtual Land Land { get; set; }
         public virtual Login Login { get; set; }
         public virtual Kredit Kredit { get; set; }
+        public virtual KreditKarte KreditKarte { get; set; }
     }
 }
