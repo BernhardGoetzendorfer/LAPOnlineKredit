@@ -39,15 +39,15 @@ namespace LAPOnlineKredit.freigabe
                 throw new ArgumentNullException(nameof(vorname));
             if (string.IsNullOrEmpty(nachname))
                 throw new ArgumentNullException(nameof(nachname));
-            if (MonatsEinkommen <= 0 || MonatsEinkommen > 50000)
+            if (MonatsEinkommen < 0 || MonatsEinkommen > 50000)
                 throw new ArgumentException($"Ungültigter Wert für {nameof(MonatsEinkommen)}");
-            if (WohnKosten <= 0 || WohnKosten > 10000)
+            if (WohnKosten < 0 || WohnKosten > 10000)
                 throw new ArgumentException($"Ungültigter Wert für {nameof(WohnKosten)}");
-            if (SonstigeEinkommen <= 0 || SonstigeEinkommen > 10000)
+            if (SonstigeEinkommen < 0 || SonstigeEinkommen > 10000)
                 throw new ArgumentException($"Ungültigter Wert für {nameof(SonstigeEinkommen)}");
-            if (SonstigeAusgaben <= 0 || SonstigeAusgaben > 10000)
+            if (SonstigeAusgaben < 0 || SonstigeAusgaben > 10000)
                 throw new ArgumentException($"Ungültigter Wert für {nameof(SonstigeAusgaben)}");
-            if (Raten <= 0 || Raten > 10000)
+            if (Raten < 0 || Raten > 10000)
                 throw new ArgumentException($"Ungültigter Wert für {nameof(Raten)}");
 
             double verfügbarerBetrag = MonatsEinkommen + SonstigeEinkommen - WohnKosten - SonstigeEinkommen - SonstigeAusgaben - Raten;

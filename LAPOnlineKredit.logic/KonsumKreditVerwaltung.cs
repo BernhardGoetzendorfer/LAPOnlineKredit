@@ -24,8 +24,8 @@ namespace LAPOnlineKredit.logic
                 {
                     neuerKunde = new Kunde()
                     {
-                        Vorname = "Johann",
-                        Nachname = "Berger",
+                        Vorname = "",
+                        Nachname = "",
                         Geschlecht = "m"
                     };
                     context.alleKunden.Add(neuerKunde); 

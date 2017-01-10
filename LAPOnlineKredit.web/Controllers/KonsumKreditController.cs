@@ -45,7 +45,7 @@ namespace LAPOnlineKredit.web.Controllers
 
             if (ModelState.IsValid) // Schaut ob im kreditModel alles Gültig ist. (bzw ob irgendwelche error dort aufgetaucht sind.)
             {
-                if (Request.Cookies["idkunde"] == null) //Wird ausgeführt wenn es kein "bestehender Kunde" ist.
+                if (Request.Cookies["idkunde"] == null) //Wird ausgeführt wenn es ein neuer Kunde ist.
                 {
                     Kunde neuerKunde = KonsumKreditVerwaltung.ErzeugeKunde(); //Erzeuge neuen Kunden.
 
