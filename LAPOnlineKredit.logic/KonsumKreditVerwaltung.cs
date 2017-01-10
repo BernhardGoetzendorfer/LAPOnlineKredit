@@ -766,10 +766,9 @@ namespace LAPOnlineKredit.logic
         }
 
 
-        public static List<Kunde> KundenLaden()
+        public static List<Kunde> KundenLaden() //Liste aller Kunden. Absteigend sortiert = Neue Kunden werden Oben angezeigt
         {
-            Debug.WriteLine("KonsumKreditVerwaltung - KundenLaden");
-            Debug.Indent();
+            Debug.WriteLine("KonsumKreditVerwaltung, KundenLaden");
 
             List<Kunde> alleKunden = null;
 
@@ -784,34 +783,66 @@ namespace LAPOnlineKredit.logic
                         .Include("Familienstand")
                         .Include("FinanzielleSituation")
                         .Include("IdentifikationsArt")
-                        .Include("KontaktDaten")
-                        .Include("KontoDaten")
-                        .Include("KreditWunsch")
-                        .Include("Schulabschluss")
+                        .Include("Kontakt")
+                        .Include("Konto")
+                        .Include("Kredit")
+                        .Include("Abschluss")
                         .Include("Titel")
-                        .Include("TitelNachstehend")
                         .Include("Wohnart")
-                        .Include("Staatsangehoerigkeit")
-                        .Where(x => (x.Konto != null || x.KreditKarte != null))
-                        .OrderByDescending(x => x.ID)
+                        .Include("Land")
+                        .Where(x => (x.Konto != null || x.KreditKarte != null)) //Zeig die Kunden an, die ein Konto oder eine Kreditkarte angegeben haben
+                        .OrderByDescending(x => x.ID) // Sortiere absteigend
                         .ToList();
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Fehler in KundenLaden");
-                Debug.Indent();
                 Debug.WriteLine(ex.Message);
-                Debug.Unindent();
                 Debugger.Break();
             }
-
-            Debug.Unindent();
+            
             return alleKunden;
         }
+        
 
+        public static List<Kunde> LetzteKundenLaden()
+        {
+            Debug.WriteLine("KonsumKreditVerwaltung, LetzteKundenLaden");
 
+            List<Kunde> alleKunden = null;
 
+            try
+            {
+                using (var context = new OnlineKreditEntities())
+                {
+                    alleKunden = context.alleKunden
+                        .Include("Arbeitgeber")
+                        .Include("Arbeitgeber.BeschaeftigungsArt")
+                        .Include("Arbeitgeber.Branche")
+                        .Include("Familienstand")
+                        .Include("FinanzielleSituation")
+                        .Include("IdentifikationsArt")
+                        .Include("Kontakt")
+                        .Include("Konto")
+                        .Include("Kredit")
+                        .Include("Abschluss")
+                        .Include("Titel")
+                        .Include("Wohnart")
+                        .Include("Land")
+                        .Where(x => (x.Konto != null || x.KreditKarte != null))
+                        .OrderByDescending(x => x.ID)
+                        .Take(10)
+                        .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+            
+            return alleKunden;
+        }
 
 
 

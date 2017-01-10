@@ -120,12 +120,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\FreigabeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KonsumKreditController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AnmeldeModel.cs" />
     <Compile Include="Models\ArbeitgeberModel.cs" />
     <Compile Include="Models\BeschaeftigungsArtModel.cs" />
     <Compile Include="Models\BildungsModel.cs" />
@@ -225,6 +227,8 @@
     <Content Include="Views\KonsumKredit\Zusammenfassung.cshtml" />
     <Content Include="Views\KonsumKredit\KontaktDaten.cshtml" />
     <Content Include="Views\Freigabe\Index.cshtml" />
+    <Content Include="Views\Administration\Anmelden.cshtml" />
+    <Content Include="Views\Administration\KreditAnträge.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

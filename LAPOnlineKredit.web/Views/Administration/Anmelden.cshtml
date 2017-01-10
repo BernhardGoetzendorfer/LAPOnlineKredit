@@ -1,0 +1,45 @@
+﻿@model LAPOnlineKredit.web.Models.AnmeldeModel
+
+@{
+    ViewBag.Title = "Anmelden";
+}
+<div id="content">
+
+    <h2>Anmelden</h2>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                @Html.LabelFor(model => model.Benutzername, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-offset-2 col-md-4">
+                    @Html.EditorFor(model => model.Benutzername, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Benutzername, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(model => model.Passwort, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-offset-2 col-md-4">
+                    @Html.EditorFor(model => model.Passwort, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Passwort, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-5 col-md-3">
+                    <input type="submit" value="Anmelden" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
