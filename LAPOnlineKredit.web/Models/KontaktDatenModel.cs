@@ -9,7 +9,7 @@ namespace LAPOnlineKredit.web.Models
 {
     public class KontaktDatenModel
     {
-        [Required]
+        
         [Display(Name = "Ihr Wohnort")]
         public int IDWohnort { get; set; }
 
@@ -18,6 +18,8 @@ namespace LAPOnlineKredit.web.Models
         public string Strasse { get; set; }
 
         [Display(Name = "Emailadresse")]
+        [Required]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Required]
@@ -26,7 +28,6 @@ namespace LAPOnlineKredit.web.Models
 
         [HiddenInput(DisplayValue = false)]
         [Required]
-
         public int ID_Kunde { get; set; }
 
 

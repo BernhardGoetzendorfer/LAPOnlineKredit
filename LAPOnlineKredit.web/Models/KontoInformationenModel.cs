@@ -14,10 +14,12 @@ namespace LAPOnlineKredit.web.Models
         [StringLength(20, ErrorMessage = "max. 20 Zeichen erlaubt")]
         public string BankName { get; set; }
 
-        [StringLength(20, ErrorMessage = "max. 20 Zeichen erlaubt")]
+        [StringLength(34, ErrorMessage = "max. 34 Zeichen erlaubt")]
+        [MinLength(15, ErrorMessage = "min. 15 Zeichen erforderlich")]
         public string IBAN { get; set; }
 
-        [StringLength(20, ErrorMessage = "max. 20 Zeichen erlaubt")]
+        [StringLength(15, ErrorMessage = "max. 15 Zeichen erlaubt")]
+        [MinLength(10, ErrorMessage = "min. 10 Zeichen erforderlich")]
         public string BIC { get; set; }
     }
 }

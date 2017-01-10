@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using LAPOnlineKredit.web.Models;
 using LAPOnlineKredit.logic;
+using LAPOnlineKredit.freigabe;
+
 
 namespace LAPOnlineKredit.web.Controllers
 {
@@ -43,7 +45,7 @@ namespace LAPOnlineKredit.web.Controllers
 
             if (ModelState.IsValid) // Schaut ob im kreditModel alles Gültig ist. (bzw ob irgendwelche error dort aufgetaucht sind.)
             {
-                if (Request.Cookies["idkunde"] == null) //Wird ausgeführt wenn es kein "bestehender Kunde" ist.
+                if (Request.Cookies["idkunde"] == null) //Wird ausgeführt wenn es ein neuer Kunde ist.
                 {
                     Kunde neuerKunde = KonsumKreditVerwaltung.ErzeugeKunde(); //Erzeuge neuen Kunden.
 
@@ -65,7 +67,7 @@ namespace LAPOnlineKredit.web.Controllers
                 }
             }
             return View(kreditModel); //Falls das Modelstate nicht Gültig ist bleib hier und forder erneute Dateneingabe
-        } 
+        }
 
 
         [HttpGet]
@@ -89,7 +91,7 @@ namespace LAPOnlineKredit.web.Controllers
             }
             return View(finanzModel);
         }
-        
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -97,9 +99,9 @@ namespace LAPOnlineKredit.web.Controllers
         {
             Debug.WriteLine("POST, KonsumKreditController, FinanzielleSituation");
 
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                if(KonsumKreditVerwaltung.FinanzielleSituationSpeichern(
+                if (KonsumKreditVerwaltung.FinanzielleSituationSpeichern(
                                         finanzModel.NettoEinkommen,
                                         finanzModel.Raten,
                                         finanzModel.Wohnkosten,
@@ -109,7 +111,7 @@ namespace LAPOnlineKredit.web.Controllers
                 {
                     return RedirectToAction("PersönlicheDaten");
                 }
-                    
+
             }
 
             return View(finanzModel);
@@ -286,7 +288,7 @@ namespace LAPOnlineKredit.web.Controllers
             Arbeitgeber arbeitgeberDaten = KonsumKreditVerwaltung.ArbeitgeberDatenLaden(arbeitgeberModel.ID_Kunde);
 
             //Wenn Daten vorhanden sind übergib sie dem Model und anschließend der View
-            if(arbeitgeberDaten != null)
+            if (arbeitgeberDaten != null)
             {
                 arbeitgeberModel.BeschäftigtSeit = arbeitgeberDaten.BeschaeftigtSeit.Value.ToString("MM.yyyy");
                 arbeitgeberModel.FirmenName = arbeitgeberDaten.Firmenname;
@@ -305,7 +307,7 @@ namespace LAPOnlineKredit.web.Controllers
         {
             Debug.WriteLine("POST, KonsumKreditController, Arbeitgeber");
 
-            if(ModelState.IsValid) //Wenn die Daten übereinstimmen/ keine Fehler liefern
+            if (ModelState.IsValid) //Wenn die Daten übereinstimmen/ keine Fehler liefern
             {
                 //Speichere die Daten von der View/dem Formular in die DB
 
@@ -379,16 +381,23 @@ namespace LAPOnlineKredit.web.Controllers
                 });
             }
 
-
-            KontaktDatenModel model = new KontaktDatenModel()
+            KontaktDatenModel kontaktModel = new KontaktDatenModel()
             {
+                AlleWohnorte = orte,
                 ID_Kunde = int.Parse(Request.Cookies["idKunde"].Value)
-                
             };
 
-            model.AlleWohnorte = orte;
 
-            return View(model);
+            Kontakt kontaktDaten = KonsumKreditVerwaltung.KontaktDatenLaden(kontaktModel.ID_Kunde);
+            if (kontaktDaten != null)
+            {
+                kontaktModel.Strasse = kontaktDaten.Strasse;
+                kontaktModel.Email = kontaktDaten.eMail;
+                kontaktModel.Telefonnummer = kontaktDaten.Telefonnummer;
+                kontaktModel.IDWohnort = kontaktDaten.FKOrt.Value;
+            } 
+
+            return View(kontaktModel);
         }
 
         [HttpPost]
@@ -422,7 +431,7 @@ namespace LAPOnlineKredit.web.Controllers
             // Find für den aktuellen Kunden ALLE Daten und übergib sie dem Zusammenfassungs Model
 
             ZusammenfassungModel zusammenfassungsModel = new ZusammenfassungModel(); //Erzeuge eine instanz aus dem Model
-            
+
             zusammenfassungsModel.ID_Kunde = int.Parse(Request.Cookies["idKunde"].Value); //Hol die die ID aus dem Cookie und arbeite mit diesem Kunden weiter.
 
             //Jetzt lade ALLE Daten die zum Kunden gehören aus der Datenbank in unser Model, das anschließend der View gegeben wird.
@@ -472,13 +481,45 @@ namespace LAPOnlineKredit.web.Controllers
             zusammenfassungsModel.Bankname = aktuellerKunde.Konto.Bankname;
             zusammenfassungsModel.IBAN = aktuellerKunde.Konto.IBAN;
             zusammenfassungsModel.BIC = aktuellerKunde.Konto.BIC;
-            
+
 
             return View(zusammenfassungsModel); //Liefere der View alle zuvor geladenen Daten 
         }
 
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Bestätigung(int id, bool? bestätigt)  //Methode ob Kredit gewährt wird
+        {
+            if (bestätigt.HasValue && bestätigt.Value) //Schaue ob der Bool einen Wert hat
+            {
+                Debug.WriteLine("Post, Konsumkredit, Bestaetigung");
+
+                Kunde aktuellerKunde = KonsumKreditVerwaltung.KundeLaden(id); //Hole den aktuellen Kunden
+                Response.Cookies.Remove("idKunde");
+
+                bool istFreigegeben = KreditFreigabe.FreigabeErteilt( //Überprüfe ob der Kunde mit den eingetragenen Werten Kreditwürdig ist.
+                                                            aktuellerKunde.Geschlecht,
+                                                            aktuellerKunde.Vorname,
+                                                            aktuellerKunde.Nachname,
+                                                            aktuellerKunde.Familienstand.Bezeichnung,
+                                                            (double)aktuellerKunde.FinanzielleSituation.MonatsEinkommen,
+                                                            (double)aktuellerKunde.FinanzielleSituation.Wohnkosten,
+                                                            (double)aktuellerKunde.FinanzielleSituation.SonstigeEinkommen,
+                                                            (double)aktuellerKunde.FinanzielleSituation.SonstigeAusgaben,
+                                                            (double)aktuellerKunde.FinanzielleSituation.Raten);
+
+                Debug.WriteLine($"Kreditfreigabe {(istFreigegeben ? "" : "nicht")}erteilt!"); //Gibt der Konsole zurück, ob Freigegeben True oder False ist. (Ob der Kunde den KRedit bekommt)
+
+                return RedirectToAction("Index", "Freigabe", new { erfolgreich = istFreigegeben });
+
+            }
+            else
+            {
+                return RedirectToAction("Zusammenfassung");
+            }
 
 
+        }
     }
 }

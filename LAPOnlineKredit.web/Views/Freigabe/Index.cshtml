@@ -1,0 +1,38 @@
+﻿@model bool
+@{
+    ViewBag.Title = "Kredit-Freigabe";
+}
+
+@if (Model)
+{
+    <div id="content" style="margin-top: 20px">
+        <h2>Kredit-Freigabe</h2>
+        <h3>Ihr Kredit kann bewilligt werden!</h3>
+
+        <div class="form-horizontal">
+            <div class="row" style="margin-top: 20px">
+                <div class="col-lg-offset-4 col-md-offset-4 col-lg-6 col-md-6">
+                    Bitte laden Sie den verlinkten Antrag auf Ihren Computer. Füllen Sie diesen aus und bringen Sie ihn in die nächste Deutsche Bank Filiale!
+                    <br /><br />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div id="content" style="margin-top: 20px">
+        <h2>Kredit-Absage</h2>
+        <h3>Ihr Kredit kann leider <strong>nicht</strong> bewilligt werden!</h3>
+
+        <div class="form-horizontal">
+            <div class="row" style="margin-top: 20px">
+                <div class="col-lg-offset-4 col-md-offset-4 col-lg-6 col-md-6">
+                    Ihre angegebenen Daten erlauben es uns leider nicht, Ihnen ein passendes Kredit-Angebot zu unterbreiten. Natürlich stehen wir Ihnen gerne zu einem persönlichen Beratungsgespräch in unserer nächsten Deutsche Bank Filiale zur Verfügung!
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
