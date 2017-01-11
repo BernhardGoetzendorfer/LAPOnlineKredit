@@ -529,8 +529,65 @@ namespace LAPOnlineKredit.web.Controllers
             {
                 return RedirectToAction("Zusammenfassung");
             }
-
-
         }
+
+
+        [HttpGet]
+        public ActionResult WerbeBanner() //Lade die letzten 10 Einträge aus der Datenbank und gib sie der View
+        {
+            Debug.WriteLine("GET, KonsumKredit, WerbeBanner");
+
+            
+            List<Kunde> alleKunden = KonsumKreditVerwaltung.LetzteKundenLaden();
+            List<ZusammenfassungModel> alleKundenModel = new List<ZusammenfassungModel>();
+
+            foreach (var aktKunde in alleKunden)
+            {
+                ZusammenfassungModel model = new ZusammenfassungModel();
+
+                model.ID_Kunde = aktKunde.ID;
+
+                model.Betrag = (int)aktKunde.Kredit.Betrag;
+                model.Laufzeit = aktKunde.Kredit.Laufzeit;
+
+                model.Nettoeinkommen = (double)aktKunde.FinanzielleSituation.MonatsEinkommen.Value;
+                model.Wohnkosten = (double)aktKunde.FinanzielleSituation.Wohnkosten.Value;
+                model.SonstigesEinkommen = (double)aktKunde.FinanzielleSituation.SonstigeEinkommen.Value;
+                model.SonstigeAusgaben = (double)aktKunde.FinanzielleSituation.SonstigeAusgaben.Value;
+                model.Raten = (double)aktKunde.FinanzielleSituation.Raten.Value;
+
+                model.Geschlecht = aktKunde.Geschlecht == "m" ? "Herr" : "Frau";
+                model.Vorname = aktKunde.Vorname;
+                model.Nachname = aktKunde.Nachname;
+                model.Titel = aktKunde.Titel?.Bezeichnung;
+                model.Geburtstag = DateTime.Now;
+                model.Staatsbuergerschaft = aktKunde.Land?.Bezeichnung;
+                model.familienstand = aktKunde.Familienstand?.Bezeichnung;
+                model.Wohnart = aktKunde.Wohnart?.Bezeichnung;
+                model.Bildung = aktKunde.Abschluss?.Bezeichnung;
+                model.IdentifikationsArt = aktKunde.Identifikationsart?.Bezeichnung;
+                model.Identifikationsnummer = aktKunde.Identifikationsnummer;
+
+                model.Firmenname = aktKunde.Arbeitgeber?.Firmenname;
+                model.BeschaeftigungsArt = aktKunde.Arbeitgeber?.BeschaeftigungsArt?.Bezeichnung;
+                model.Branche = aktKunde.Arbeitgeber?.Branche?.Bezeichnung;
+                model.BeschaeftigtSeit = aktKunde.Arbeitgeber?.BeschaeftigtSeit.Value.ToShortDateString();
+
+                model.Strasse = aktKunde.Kontakt?.Strasse;
+                //model.Ort = aktKunde.Kontakt?.Ort.PLZ;
+                model.Mail = aktKunde.Kontakt?.eMail;
+                model.Telefonnummer = aktKunde.Kontakt?.Telefonnummer;
+
+                model.NeuesKonto = (bool)aktKunde.Konto?.IstKunde.Value;
+                model.Bankname = aktKunde.Konto?.Bankname;
+                model.IBAN = aktKunde.Konto?.IBAN;
+                model.BIC = aktKunde.Konto?.BIC;
+
+                alleKundenModel.Add(model);
+            }
+
+            return PartialView(alleKundenModel);
+        }
+
     }
 }

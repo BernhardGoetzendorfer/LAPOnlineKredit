@@ -229,6 +229,7 @@
     <Content Include="Views\Freigabe\Index.cshtml" />
     <Content Include="Views\Administration\Anmelden.cshtml" />
     <Content Include="Views\Administration\KreditAnträge.cshtml" />
+    <Content Include="Views\KonsumKredit\WerbeBanner.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
