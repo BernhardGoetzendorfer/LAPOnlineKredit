@@ -1,0 +1,100 @@
+Tutorial um ein Balkendiagramm mittels der js-Library d3 - http://d3js.org/ - zu erstellen.
+Das Tutorial ist angelehnt an: http://bost.ocks.org/mike/bar/
+Ein Beispiel hierfür ist im Partyshop - Shopcontroller unter Index zu finden.
+
+1. Füge über nuget die d3 js Library hinzu (alternativ unter https://github.com/mbostock/d3)
+
+2. Binde d3 nun über die BundleConfig.cs in das Projekt ein.
+
+3. Erzeuge ein Div mit der Klasse chart wie folgt:
+	<div class="chart"></div>
+
+4. Füge ein passende css-Befehle für das Balkendiagramm ein, z.B.:
+<style>
+    .chart div {
+        font: 10px sans-serif;
+        background-color: steelblue;
+        text-align: right;
+        padding: 3px;
+        margin: 1px;
+        color: white;
+    }
+</style>
+
+5. Nun kann mittels einer js-Funktion für dieses Div ein Balkendiagramm erstellt werden, z.B.:
+<script>
+    $(document).ready(function () {
+
+        //Beispiel um Daten dynamisch mittels C# Code zu laden
+        var data = [
+
+            @for (int i = 0; i < 10; i++)
+            {
+                if(i<9)
+                {
+                    @String.Concat(i, ",");
+                }
+                else
+                {
+                    @i
+                }
+            }
+        ];
+
+        //Beispiel damit das Diagramm immer 420px lang bleibt und die Balken sich relativ dazu
+        // anpassen
+        var x = d3.scale.linear()
+                    .domain([0, d3.max(data)])
+                    .range([0, 420]);
+
+        //Erzeugt das Balkendiagramm im div mit der Klasse chart anhand der Daten data[]
+        d3.select(".chart")
+            .selectAll("div")
+                .data(data)
+            .enter().append("div")
+                .style("width", function (d) { return x(d) + "px"; })
+                .text(function (d) { return d; });
+    });
+</script>
+
+6. Verbesserte Variante mit Beschriftungen im Balken
+
+@section Scripts {
+<script>
+    $(document).ready(function () {
+
+        //Beispiel um Daten dynamisch mittels C# Code zu laden
+        var data = [
+
+                @for (int i = 0; i < Model.Count-1; i++)
+                {
+                    @:{name: '@Model[i].descr.Split(':')[0]', value:
+
+                    //Wert mit ,
+                    @String.Concat(Model[i].anzahl, "},")
+                }
+
+                //letzter Wert der Liste
+                {name: '@Model[Model.Count - 1].descr.Split(':')[0]', value:
+                @String.Concat(Model[Model.Count - 1].anzahl, "}")
+        ];
+
+        //Beispiel damit das Diagramm immer 420px lang bleibt und die Balken sich relativ dazu
+        // anpassen
+
+        //d3.max(data)]
+
+        var x = d3.scale.linear()
+                    .domain([0, @Model.Max(x=>x.anzahl)])
+                    .range([0, 420]);
+
+        //Erzeugt das Balkendiagramm im div mit der Klasse chart anhand der Daten data[]
+        d3.select(".chart")
+            .selectAll("div")
+                .data(data)
+            .enter().append("div")
+                .style("width", function (d) { return x(d.value) + "px"; })
+                .text(function (d) { return d.name + " " + d.value; });
+    });
+</script>
+}
