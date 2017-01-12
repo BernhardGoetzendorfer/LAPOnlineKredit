@@ -694,25 +694,5 @@ namespace LAPOnlineKredit.logic
 
             return orte;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
