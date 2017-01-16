@@ -27,7 +27,7 @@
                     @Html.LabelFor(model => model.BankName, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-lg-6 col-md-6">
-                    @Html.TextBoxFor(model => model.BankName, new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.BankName, new { @class = "form-control", maxlength = "20" })
                     @Html.ValidationMessageFor(model => model.BankName, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -36,7 +36,7 @@
                     @Html.LabelFor(model => model.IBAN, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-lg-6 col-md-6">
-                    @Html.TextBoxFor(model => model.IBAN, new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.IBAN, new { @class = "form-control", maxlength = "34" })
                     @Html.ValidationMessageFor(model => model.IBAN, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -45,7 +45,7 @@
                     @Html.LabelFor(model => model.BIC, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-lg-6 col-md-6">
-                    @Html.TextBoxFor(model => model.BIC, new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.BIC, new { @class = "form-control", maxlength = "15" })
                     @Html.ValidationMessageFor(model => model.BIC, "", new { @class = "text-danger" })
                 </div>
             </div>

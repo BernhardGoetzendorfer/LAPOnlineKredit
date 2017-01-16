@@ -23,12 +23,12 @@
 
         [Required]
         [Display(Name = "Vorname*")]
-        [StringLength(50, ErrorMessage = "max. 50 Zeichen")]
+        [StringLength(30, ErrorMessage = "max. 30 Zeichen")]
         public string Vorname { get; set; }
 
         [Required]
         [Display(Name = "Nachname*")]
-        [StringLength(50, ErrorMessage = "max. 50 Zeichen")]
+        [StringLength(30, ErrorMessage = "max. 30 Zeichen")]
         public string Nachname { get; set; }
 
         [Display(Name = "Titel")]
