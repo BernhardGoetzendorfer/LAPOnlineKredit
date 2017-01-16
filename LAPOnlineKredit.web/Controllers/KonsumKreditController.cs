@@ -377,7 +377,7 @@ namespace LAPOnlineKredit.web.Controllers
                 orte.Add(new WohnortModel()
                 {
                     ID = ort.ID.ToString(),
-                    Bezeichnung = ort.Bezeichnung
+                    Bezeichnung = ort.Bezeichnung + "(" + ort.PLZ + ")"
                 });
             }
 
