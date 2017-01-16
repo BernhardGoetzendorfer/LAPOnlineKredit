@@ -11,7 +11,7 @@ namespace LAPOnlineKredit.web.Models
         public int ID_Kunde { get; set; }
         public bool NeuesKonto { get; set; }
 
-        [Display(Name = "Name Ihrer Bank*")]
+        [Display(Name = "Name Ihrer Bank")]
         [StringLength(20, ErrorMessage = "max. 20 Zeichen erlaubt")]
         public string BankName { get; set; }
 

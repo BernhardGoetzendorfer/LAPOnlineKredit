@@ -63,7 +63,7 @@
 
         [Required]
         [StringLength(20, ErrorMessage = "max. 20 Zeichen erlaubt")]
-        [Display(Name = "Identifikations-Nummer")]
+        [Display(Name = "Identifikations-Nummer*")]
         public string IdentifikationsNummer { get; set; }
 
         [HiddenInput(DisplayValue = false)]
