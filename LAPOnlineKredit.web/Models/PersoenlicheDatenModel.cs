@@ -22,10 +22,12 @@
         public Geschlecht Geschlecht { get; set; }
 
         [Required]
+        [Display(Name = "Vorname*")]
         [StringLength(50, ErrorMessage = "max. 50 Zeichen")]
         public string Vorname { get; set; }
 
         [Required]
+        [Display(Name = "Nachname*")]
         [StringLength(50, ErrorMessage = "max. 50 Zeichen")]
         public string Nachname { get; set; }
 

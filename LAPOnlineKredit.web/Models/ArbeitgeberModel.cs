@@ -10,7 +10,7 @@ namespace LAPOnlineKredit.web.Models
     {
         [Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]
         [StringLength(30, ErrorMessage = "Maximal 30 Zeichen")]
-        [Display(Name = "Der Name Ihrer Firma")]
+        [Display(Name = "Der Name Ihrer Firma*")]
         public string FirmenName { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]
