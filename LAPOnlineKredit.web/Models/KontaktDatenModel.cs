@@ -25,7 +25,7 @@ namespace LAPOnlineKredit.web.Models
 
         
         [Required(ErrorMessage = "Telefonnummer ist erforderlich")]
-        [RegularExpression("^(?!0+$)(\\+\\d{1,3}[- ]?)?(?!0+$)\\d{10,15}$", ErrorMessage = "Please enter valid phone no.")]
+        [RegularExpression("^(?!0+$)(\\+\\d{1,3}[- ]?)?(?!0+$)\\d{10,15}$", ErrorMessage = "Geben Sie eine gültige Telefonnummer an.")]
         [Display(Name = "Telefonnummer*")]
         public string Telefonnummer { get; set; }
 
