@@ -14,17 +14,19 @@ namespace LAPOnlineKredit.web.Models
         public int IDWohnort { get; set; }
 
         [Required]
-        [Display(Name = "Straße und Hausnummer")]
+        [Display(Name = "Straße und Hausnummer*")]
         public string Strasse { get; set; }
 
-        [Display(Name = "Emailadresse")]
+        [Display(Name = "Emailadresse*")]
         [Required]
         [EmailAddress]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        [Required]
-        [Display(Name = "Telefonnummer")]
+        
+        [Required(ErrorMessage = "Telefonnummer ist erforderlich")]
+        [RegularExpression("^(?!0+$)(\\+\\d{1,3}[- ]?)?(?!0+$)\\d{10,15}$", ErrorMessage = "Please enter valid phone no.")]
+        [Display(Name = "Telefonnummer*")]
         public string Telefonnummer { get; set; }
 
         [HiddenInput(DisplayValue = false)]
