@@ -27,6 +27,7 @@ namespace LAPOnlineKredit.logic
                         Vorname = "",
                         Nachname = "",
                         Geschlecht = "m"
+                        AntragGestelltAm = DateTime.Now
                     };
                     context.alleKunden.Add(neuerKunde); 
                     context.SaveChanges(); //Füge den dummy der Datenbank hinzu
@@ -693,6 +694,22 @@ namespace LAPOnlineKredit.logic
             }
 
             return orte;
+
+
         }
+
+        IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler(); //Erzeuge ein neues Quartz Objekt, Das zur 
+        //scheduler.Start();
+       
+
+        public static List<Kunde> UeberprüfeKundenBezahlt()
+        {
+           
+
+
+            return null;
+        }
+
+
     }
 }
